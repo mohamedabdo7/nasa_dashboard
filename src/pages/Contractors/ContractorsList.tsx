@@ -1,0 +1,182 @@
+import { FC, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { Col, Container, Row, Spinner, Stack } from "react-bootstrap";
+import { GoSearch } from "react-icons/go";
+import { useFetchTableData } from "../../hooks/useFetchTableData";
+import ActionsMenu from "../../components/UI/ActionsMenu/ActionsMenu";
+import { routes } from "../../constants";
+import SearchInput from "../../components/UI/SearchInput/SearchInput";
+import Button from "../../components/UI/Button";
+import TableComponent from "../../components/Table/TableComponent";
+import ModalComponent from "../../components/ModalComponent/ModalComponent";
+import { FaExclamationCircle } from "react-icons/fa";
+import { i18n, showToast } from "../../utils";
+import { truncateString } from "../../utils/truncateString";
+import { deleteContractor } from "../../services";
+
+const ContractorsList: FC = () => {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  // State management
+  const [searchValue, setSearchValue] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [selectedContractor, setSelectedContractor] = useState<any>(null);
+  const [listiner, setListiner] = useState(false);
+
+  // Fetching data
+  const url = "getContractors"; // API endpoint for contractors
+  const { data, loading, count, setPageNumber, pageNumber } = useFetchTableData(
+    searchValue,
+    url,
+    { search: searchValue },
+    listiner
+  );
+
+  const memoizedData = useMemo(() => data, [data]);
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setSelectedContractor(null);
+  };
+
+  const handleDeleteContractor = async () => {
+    if (!selectedContractor) return;
+
+    setDeleteLoading(true);
+    try {
+      // Call the API service to delete the contractor
+      await deleteContractor(selectedContractor.id);
+
+      // Trigger re-fetching of table data after successful deletion
+      setListiner(!listiner);
+
+      // Close the modal after deletion
+      handleModalClose();
+
+      // Show success message
+      showToast(t("contractors.contractorDeleted"), "success");
+    } catch (error) {
+      console.error("Failed to delete contractor:", error);
+
+      // Show error message if the deletion fails
+      showToast(t("contractors.deleteFailed"), "error");
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
+
+  // Table columns definition
+  const columns = [
+    {
+      Header: `${t("inputs.name")}`,
+      accessor: i18n.language === "en" ? "nameEn" : "nameAr",
+      disableSortBy: true,
+      Cell: ({ row }: any) => (
+        <div className="d-flex">
+          <span className="ms-2">
+            {truncateString(row.original.nameEn, i18n.language !== "en", 50)}
+          </span>
+        </div>
+      ),
+    },
+    {
+      Header: t("inputs.email"),
+      accessor: "email",
+      disableSortBy: true,
+    },
+    {
+      Header: "",
+      accessor: "actions",
+      disableSortBy: true,
+      Cell: ({ row }: any) => (
+        <ActionsMenu
+          onEdit={() =>
+            navigate(
+              routes.EDITCONTRACTOR.replace(":id", row.original.id.toString())
+            )
+          }
+          onView={() =>
+            navigate(
+              routes.VIEWCONTRACTOR.replace(":id", row.original.id.toString())
+            )
+          }
+          onDelete={() => {
+            setSelectedContractor(row.original);
+            setModalOpen(true);
+          }}
+        />
+      ),
+    },
+  ];
+
+  return (
+    <Container fluid>
+      <Stack direction="vertical">
+        {/* Search and Add Service Row */}
+        <Row>
+          <Col lg={10} md={12}>
+            <SearchInput
+              value={searchValue}
+              type="text"
+              leftIcon={<GoSearch />}
+              inputMode="search"
+              onChange={(e: any) => setSearchValue(e.target.value)}
+              placeholder={t("contractors.search")}
+            />
+          </Col>
+
+          <Col md={12} lg={2}>
+            <Button
+              onClick={() => navigate(routes.ADDCONTRACTOR)}
+              text={t("contractors.addContractor")}
+              type="button"
+              style={{ height: "49.6px", fontSize: "14px", margin: "1rem 0" }}
+            />
+          </Col>
+        </Row>
+
+        {/* Loading Spinner or Table */}
+        <>
+          {loading ? (
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <Spinner animation="border" />
+            </div>
+          ) : (
+            <TableComponent
+              columns={columns}
+              data={memoizedData}
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
+              pageCount={Math.ceil(count / 10)}
+              enableSorting={true}
+            />
+          )}
+        </>
+      </Stack>
+
+      {/* Delete Contractor Modal */}
+      {isModalOpen && (
+        <ModalComponent
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          onConfirm={handleDeleteContractor}
+          modalTitle={t("contractors.deleteContractor")}
+          modalMessage={`${t("settings.deleteMsg")} “${
+            i18n.language === "en"
+              ? selectedContractor?.nameEn
+              : selectedContractor?.nameAr
+          }“?`}
+          confirmBtnText={t("buttons.delete")}
+          cancelBtnText={t("buttons.cancel")}
+          loading={deleteLoading}
+          Icon={<FaExclamationCircle color="#dc3545" size={20} />}
+        />
+      )}
+    </Container>
+  );
+};
+
+export default ContractorsList;

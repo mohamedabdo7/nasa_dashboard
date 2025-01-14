@@ -1,0 +1,91 @@
+.btn-content {
+  // margin: 1em 0 1em 0;
+
+  border-radius: 8px;
+  font-size: var(--font-text);
+  background-color: var(--primary);
+  color: var(--white);
+  cursor: pointer;
+  padding: 12px 0;
+  border: none;
+  font-weight: 400;
+  width: 100%;
+
+  &:hover:not(.no-hover) {
+    background-color: #042b72;
+    // background-color: var(--secondary);
+    background-color: var(primary-hover) !important;
+  }
+  &.secondary {
+    color: var(--white);
+    background-color: var(--secondary) !important;
+    &:hover:not(.no-hover) {
+      background-color: #7e2e0c !important;
+      color: var(--white);
+    }
+  }
+  &.modal-confirm {
+    color: var(--white);
+    background-color: #ff0000 !important;
+    &:hover:not(.no-hover) {
+      background-color: #d40000 !important;
+      color: var(--white);
+    }
+  }
+  &.dark-gray {
+    color: var(--white);
+    background-color: var(--dark-chocolate);
+    &:hover:not(.no-hover) {
+      background-color: #0a0103;
+      color: var(--white);
+    }
+  }
+  &.outline {
+    color: var(--primary);
+    background-color: transparent !important;
+    border: 1px solid var(--primary) !important;
+    // &:hover:not(.no-hover) {
+    //   background-color: var(--primary);
+    //   color: var(--white);
+    // }
+  }
+  &.outline-danger {
+    color: var(--error);
+    background-color: var(--white);
+    border: 1px solid var(--error) !important;
+    &:hover:not(.no-hover) {
+      background-color: var(--white);
+    }
+  }
+  &.dangerous {
+    color: var(--white);
+    background-color: var(--dangerous);
+  }
+  &.active {
+    color: var(--white);
+    background-color: var(--primary);
+  }
+  &:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  // div {
+  //   padding: 0 0.5rem;
+  //   // border-radius: 50%;
+  //   // width: 20px;
+  //   // height: 20px;
+  // }
+  &.isIconOnly {
+    border: none;
+    background-color: unset;
+    div {
+      padding: 2px;
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .small-loader {
+    width: 20px;
+    height: 20px;
+  }
+}

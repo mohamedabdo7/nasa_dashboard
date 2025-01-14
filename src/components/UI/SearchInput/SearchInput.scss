@@ -1,0 +1,131 @@
+.input__container {
+  margin: 1em 0 1em 0;
+  position: relative;
+  flex-direction: column;
+  color: var(--primary);
+  &::placeholder {
+    color: red;
+  }
+  .left-icon {
+    svg {
+      position: absolute;
+      top: 13px;
+      left: 12px;
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  .right-icon {
+    svg {
+      position: absolute;
+      top: 13px;
+      right: 12px;
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  input {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: unset;
+    background-color: var(--white);
+    border-radius: 8px;
+    width: 100%;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    caret-color: var(--primary);
+    color: var(--primary);
+    &::placeholder {
+      color: var(--primary);
+    }
+  }
+
+  label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding: 0.3em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: var(--secondary);
+    transform: translateY(-50%) scale(0.9);
+    background-color: #fff;
+  }
+
+  // :is(input:focus) {
+  //   border-color: var(--primary);
+  // }
+
+  .input-error {
+    border-color: var(--error);
+  }
+
+  .icon {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    left: 3%;
+    top: 19%;
+    cursor: pointer;
+  }
+
+  .icon-password {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    right: 3%;
+    top: 19%;
+    cursor: pointer;
+  }
+  .error {
+    text-align: start;
+    // font-size: var(--font-size-1);
+    padding: 0.5rem 0;
+    color: red;
+    height: 2.4rem;
+  }
+}
+
+input.num-left {
+  text-align: left !important;
+  // font-size: var(--font-size-5);
+  &::placeholder {
+    text-align: start !important;
+  }
+}
+
+input::-webkit-credentials-auto-fill-button {
+  //visibility: hidden;
+  opacity: 0;
+}
+
+input.placeholder-right::-webkit-input-placeholder {
+  text-align: start !important;
+  color: var(--primary);
+}
+input.placeholder-center::-webkit-input-placeholder {
+  text-align: center !important;
+  color: var(--primary);
+}
+
+input.padding-left {
+  padding-left: 3rem !important;
+}
+
+[dir="ltr"] {
+  .input-container {
+    .icon {
+      right: 3%;
+      // left: unset;
+    }
+
+    .icon-password {
+      right: 3%;
+      // left: unset;
+    }
+  }
+}

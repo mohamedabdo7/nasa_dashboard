@@ -1,0 +1,155 @@
+.css-dip3t8 {
+  background-color: transparent !important;
+}
+
+.css-hzpwp > .ps-menu-button:hover {
+  background-color: unset !important;
+}
+
+.css-1iqc5p > .ps-menu-button:hover {
+  background-color: transparent !important;
+}
+
+// .css-18unl23 {
+//   background-color: #185860 !important;
+// }
+
+.css-jck1ph > .ps-menu-button:hover {
+  background-color: transparent !important;
+}
+
+.css-f3bqjd > .ps-menu-button:hover {
+  background-color: transparent !important;
+}
+.css-ibllcn > .ps-menu-button:hover {
+  background-color: transparent !important;
+}
+
+aside {
+  height: 330px;
+  width: 280px !important;
+  flex: 1;
+  margin: 0 !important;
+  margin-bottom: 50px !important;
+  padding-bottom: 30px;
+  // width: 100% !important;
+}
+
+.ps-sidebar-container {
+  padding: 1rem !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.css-1nytc94.ps-collapsed {
+  width: 110px !important;
+  min-width: 110px !important;
+}
+
+.btns__container {
+  // margin: 5rem 2rem 1rem 2rem;
+  width: 100%;
+  padding: 0 17px;
+  // margin-top: 4rem;
+  // margin-bottom: 1rem;
+  position: absolute;
+  bottom: 0;
+  z-index: 1000;
+  // height: 20vh;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--primary);
+  // box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.15);
+
+  button {
+    margin: 5px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    span {
+      font-size: 14px;
+    }
+  }
+
+  .profile-btn {
+    background-color: transparent;
+    color: #ffe7d5;
+    justify-content: flex-start !important;
+    overflow: hidden;
+
+    .hstack {
+      justify-content: flex-start !important;
+      gap: 1rem;
+    }
+  }
+
+  .css-wlra1l {
+    background-color: red !important;
+  }
+
+  .profile-btn-active {
+    background-color: var(--primary);
+    color: var(--white);
+    justify-content: flex-start !important;
+    overflow: hidden;
+
+    .hstack {
+      justify-content: flex-start !important;
+      gap: 1rem;
+    }
+  }
+
+  .profile-btn-collapsed {
+    background-color: #f3f6f6;
+    color: #00a7a0;
+    justify-content: center !important;
+    overflow: hidden;
+  }
+  .logout-btn {
+    background-color: transparent;
+    color: var(--secondary);
+    justify-content: flex-start !important;
+    overflow: hidden;
+
+    .hstack {
+      justify-content: flex-start !important;
+      gap: 1rem;
+    }
+  }
+  .logout-btn-collapsed {
+    background-color: #fbdddd;
+    color: #ff0000;
+    justify-content: center !important;
+    overflow: hidden;
+  }
+}
+
+.badge-primary {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+  font-size: small;
+  text-align: center;
+  color: #fff;
+  border-radius: 2px;
+  background: var(--secondary-sec);
+}
+
+.badge-white {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+  font-size: small;
+  text-align: center;
+  color: var(--primary);
+  border-radius: 2px;
+  background: var(--white);
+}
+
+.css-wx7wi4 {
+  margin: 3px !important;
+}

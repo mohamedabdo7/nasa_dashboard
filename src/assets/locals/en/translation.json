@@ -1,0 +1,243 @@
+{
+  "home": {
+    "home": "Home"
+  },
+
+  "sidebar": {
+    "employees": "Employees",
+    "contractors": "Contractors",
+    "consultants": "Consultants",
+    "projects": "Projects",
+    "operationalRequests": "Operational Requests"
+  },
+
+  "breadcrumbs": {
+    "home": "Home",
+    "employees": "Employees",
+    "contractors": "Contractors",
+    "consultants": "Consultants",
+    "projects": "Projects",
+    "operationalRequests": "Operational Requests"
+  },
+
+  "inputs": {
+    "images": "Images",
+    "name": "Name",
+    "nameEn": "Name (English)",
+    "nameAr": "Name (Arabic)",
+    "uploadImages": "Upload Images",
+    "icon": "Icon",
+    "uploadIcon": "Upload Icon",
+    "title": "Title",
+    "body": "Body",
+    "question": "Question",
+    "answer": "Answer",
+    "email": "Email",
+    "location": "Location",
+    "locationUrl": "Location URL",
+    "phone": "Phone",
+    "socialMedia": "Social Media",
+    "socialMediaLink": "Social Media Link",
+    "password": "Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "rememberMe": "Remember Me",
+    "forgotPassword": "Forgot Password?",
+    "enterEmailToSendOTP": "Enter your email to send OTP",
+    "emailMsg": "We have sent the verification code to your email",
+    "resend": "Resend",
+    "userType": "User Type",
+    "admin": "Admin",
+    "employee": "Employee",
+    "consultant": "Consultant",
+    "role": "Role"
+  },
+
+  "toasts": {
+    "errorFetchingData": "Error fetching data"
+  },
+
+  "settings": {
+    "deleteMsg": "Are you sure you want to delete "
+  },
+
+  "buttons": {
+    "save": "Save",
+    "add": "Add",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "addNewQuestion": "Add New Question",
+    "addPhone": "Add Another phone",
+    "addSocialMedia": "Add social media",
+    "update": "Update",
+    "signIn": "Sign In",
+    "addNewService": "Add New Service",
+    "send": "Send",
+    "confirm": "Confirm",
+    "generatePassword": "Generate password"
+  },
+
+  "validation": {
+    "nameMin": "The name must be at least 4 characters",
+    "nameMax": "The name must be less than or equal to 30 characters",
+    "nameRequired": "The name is required",
+    "emailInvalid": "Please enter a valid email",
+    "emailRequired": "The email is required",
+    "typeRequired": "Please select a department",
+    "engTypeRequired": "Please select an engineer type",
+    "passwordRequired": "Password is required",
+    "passwordInvalid": "Please enter a valid password (uppercase, lowercase, number, symbol)",
+    "confirmPasswordRequired": "Confirm password is required",
+    "passwordMismatch": "Passwords do not match",
+    "roleRequired": "Please select a role",
+    "imageRequired": "Please upload an image"
+  },
+
+  "actions": {
+    "delete": "Delete",
+    "view": "View",
+    "edit": "Edit",
+    "cancel": "Cancel"
+  },
+
+  "deletsMsgs": {
+    "deleteQuestion": "Are you sure you want to delete this question?",
+    "deleteMessage": "Are you sure you want to delete this message?",
+    "deleteService": "Are you sure you want to delete this service?",
+    "deleteImage": "Are you sure you want to delete this image?"
+  },
+
+  "placeholder": {
+    "enterTitle": "Enter title",
+    "enterBody": "Enter body",
+    "searchByQuestion": "Search by question Name",
+    "question": "Enter Question",
+    "answer": "Enter Answer",
+    "location": "Enter Location",
+    "locationUrl": "Enter Location URL",
+    "enterContactPhone": "Enter Contact Phone",
+    "socialMedia": "Social Media",
+    "socialMediaLink": "Social Media Link",
+    "searchByEmailOrMessage": "Search by email or message",
+    "searchByService": "Search by service",
+    "emailSymbol": "Enter an email with an @symbol.cc",
+    "enterPassword": "Enter Password",
+    "confirmPassword": "Enter Confirm Password",
+    "name": "Enter Name",
+    "email": "Enter Email",
+    "nameEn": "Enter Name (English)",
+    "nameAr": "Enter Name (Arabic)"
+  },
+
+  "employees": {
+    "employees": "Employees",
+    "employeeInfo": "Employee Information",
+    "addEmployee": "Add Employee",
+    "editEmployee": "Edit Employee",
+    "viewEmployee": "View Employee",
+    "search": "Search by name",
+    "engineer": "Engineer",
+    "accountant": "Accountant",
+    "empType": "Employee Type",
+    "empTypePlaceholder": "Select Employee Type",
+    "engTypePlaceholder": "Select Engineer Type",
+    "engType": "Engineer Type",
+    "archEng": "Architect Engineer",
+    "mechEng": "Mechanical Engineer",
+    "electEng": "Electrical Engineer",
+    "structEng": "Structural Engineer",
+    "empCreated": "Employee created successfully",
+    "empUpdated": "Employee updated successfully",
+    "empDeleted": "Employee deleted successfully",
+    "deleteEmp": "Delete Employee"
+  },
+
+  "contractors": {
+    "contractors": "Contractors",
+    "contractorInfo": "Contractor Information",
+    "addContractor": "Add Contractor",
+    "editContractor": "Edit Contractor",
+    "viewContractor": "View Contractor",
+    "search": "Search by name",
+    "contractorType": "Contractor Type",
+    "contractorTypePlaceholder": "Select Contractor Type",
+    "generalContractor": "General Contractor",
+    "subContractor": "Subcontractor",
+    "contractorCreated": "Contractor created successfully",
+    "contractorUpdated": "Contractor updated successfully",
+    "contractorDeleted": "Contractor deleted successfully",
+    "deleteContractor": "Delete Contractor"
+  },
+
+  "consultants": {
+    "consultants": "Consultants",
+    "consultantInfo": "Consultant Information",
+    "addConsultant": "Add Consultant",
+    "editConsultant": "Edit Consultant",
+    "viewConsultant": "View Consultant",
+    "search": "Search by name",
+    "consultantType": "Consultant Type",
+    "consultantTypePlaceholder": "Select Consultant Type",
+    "generalConsultant": "General Consultant",
+    "specialistConsultant": "Specialist Consultant",
+    "consultantCreated": "Consultant created successfully",
+    "consultantUpdated": "Consultant updated successfully",
+    "consultantDeleted": "Consultant deleted successfully",
+    "deleteConsultant": "Delete Consultant"
+  },
+
+  "projects": {
+    "projects": "Projects",
+    "projectInfo": "Project Information",
+    "addProject": "Add Project",
+    "editProject": "Edit Project",
+    "viewProject": "View Project",
+    "search": "Search by name or code",
+    "projectId": "Project ID",
+    "projectName": "Project Name",
+    "manager": "Project Manager",
+    "mainContractor": "Main Contractor",
+    "consultant": "Consultant",
+    "status": "Status",
+    "running": "Running",
+    "upcoming": "Upcoming",
+    "ended": "Ended",
+    "projectCreated": "Project created successfully",
+    "projectUpdated": "Project updated successfully",
+    "projectDeleted": "Project deleted successfully",
+    "deleteProject": "Delete Project",
+    "deleteMsg": "Are you sure you want to delete the project",
+    "arabicName": "Arabic Name",
+    "arabicNamePlaceholder": "Enter Arabic Name",
+    "englishName": "English Name",
+    "englishNamePlaceholder": "Enter English Name",
+    "location": "Location",
+    "locationPlaceholder": "Enter Location",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter Description",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "managerPlaceholder": "Select Project Manager",
+    "engineersPlaceholder": "Select Engineers",
+    "contractorPlaceholder": "Select Contractor",
+    "subContractorsPlaceholder": "Select Sub-Contractors",
+    "consultantPlaceholder": "Select Consultant",
+    "uploadImages": "Upload Images",
+    "createFailed": "Failed to create project",
+    "validation": {
+      "arabicNameRequired": "Arabic Name is required",
+      "englishNameRequired": "English Name is required",
+      "locationRequired": "Location is required",
+      "descriptionRequired": "Description is required",
+      "startDateRequired": "Start Date is required",
+      "endDateRequired": "End Date is required",
+      "endDateAfterStart": "End Date must be after Start Date",
+      "managerRequired": "Project Manager is required",
+      "engineersRequired": "At least one Engineer is required",
+      "contractorRequired": "Contractor is required",
+      "subContractorsRequired": "At least one Sub-Contractor is required",
+      "consultantRequired": "Consultant is required",
+      "imageFileSize": "Each image must be less than 5MB"
+    }
+  }
+}

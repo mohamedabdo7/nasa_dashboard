@@ -1,0 +1,80 @@
+.upload-files-container {
+  position: relative;
+  border: 1px solid var(--gray);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+
+  .file-count {
+    margin-top: 5px;
+  }
+
+  button {
+    outline: none;
+    background: #1858601a;
+    color: var(--primary);
+    border: none;
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 99px;
+    width: auto;
+    height: 31px;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    &.isHoverd:hover {
+      background: #08d5f01a;
+    }
+    &.isNotHoverd:hover {
+      background: #1858601a;
+    }
+  }
+
+  .input-label {
+    position: absolute;
+    top: -15px;
+    // left: 15px;
+    z-index: 0;
+    background: #f7f5f5;
+    padding: 0.3em;
+    color: var(--gray);
+  }
+}
+
+.inputFile {
+  display: none;
+}
+
+// .attachment-thumbnails {
+//   .attachment-thumbnail {
+//     position: relative;
+//     padding: 9px 9px 0 0;
+//     width: 72px;
+//     height: 72px;
+//     margin: 0 8px 8px 0;
+//     img {
+//       width: 100%;
+//       height: 100%;
+//       border-radius: 8px;
+//     }
+//     .file-icon {
+//       background: var(--secondary);
+//       width: 100%;
+//       height: 100%;
+//       display: flex;
+//       border-radius: 8px;
+//       justify-content: center;
+//       align-items: center;
+//     }
+//     .close-icon {
+//       position: absolute;
+//       top: -4px;
+//       right: 0;
+//       color: #ff0000;
+//       width: 18px;
+//       height: 18px;
+//       cursor: pointer;
+//     }
+//   }
+// }

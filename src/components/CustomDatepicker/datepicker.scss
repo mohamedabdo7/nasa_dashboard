@@ -1,0 +1,34 @@
+.react-datepicker-wrapper {
+  width: 100% !important;
+
+  border: 1px solid red svg {
+    top: 8px;
+    right: 10px;
+    fill: var(--primary);
+  }
+  .react-datepicker-popper {
+    z-index: 999 !important;
+  }
+  input {
+    width: 100% !important;
+    padding: 0.8em;
+    outline: none;
+    border: 1px solid var(--gray);
+    background-color: transparent;
+    border-radius: 8px;
+    height: 52px;
+  }
+
+  input::placeholder {
+    color: var(--gray);
+    opacity: 1;
+  }
+}
+
+.formerror {
+  border: 1px solid red !important;
+}
+
+// .react-datepicker {
+//   width: 328px !important;
+// }

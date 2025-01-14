@@ -1,0 +1,122 @@
+// _base.scss
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Apply some basic styling to the html and body
+html {
+  font-size: 16px;
+  scroll-behavior: smooth; // Smooth scroll for anchor links
+}
+
+body {
+  font-family: var(--font-primary), sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: var(--secondary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+// Set up anchor links styling globally
+a {
+  text-decoration: none;
+  color: inherit;
+
+  // &:hover {
+  //   color: var(--secondary);
+  //   text-decoration: underline;
+  // }
+}
+
+// Utility classes for margin and padding (useful for layout)
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Set up some global headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1.125rem;
+}
+
+// Global paragraph styling
+p {
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+// Customize scrollbars for a better UI experience
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary);
+}
+
+.css-dju2wi > .ps-menu-button:hover {
+  background-color: unset !important;
+}
+
+.css-omq4nh > .ps-menu-button:hover {
+  background-color: unset !important;
+}
+
+.breadcrumb-item.active {
+  color: var(--praimary, #3f67b1) !important;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+}

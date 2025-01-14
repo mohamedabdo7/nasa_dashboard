@@ -1,0 +1,22 @@
+.main-container {
+  height: 100vh;
+  flex: 1;
+  overflow-x: hidden;
+  // overflow-y: auto;
+  flex-grow: 1;
+  background-color: var(--secondary);
+
+  .content {
+    margin: 1rem;
+    overflow-x: hidden;
+    // background-color: var(--secondary);
+    min-height: calc(100vh - 106px) !important;
+    // width: 100%;
+  }
+  & > div,
+  & > section {
+    flex: 1;
+    display: flex;
+    padding: var(--padding-md);
+  }
+}

@@ -1,0 +1,120 @@
+/* src/pages/Login.scss */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--secondary);
+  // background: red;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 500px;
+  min-width: 300px;
+  height: 90vh;
+  padding: 40px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  text-align: center;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 8px;
+  position: absolute;
+  top: -12px;
+  left: 8px;
+  background: var(--white);
+  padding: 0 10px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid var(--primary);
+  border-radius: 8px !important;
+  box-sizing: border-box;
+  outline: none;
+  &::placeholder {
+    color: var(--primary);
+    opacity: 1;
+    margin: 0 1rem;
+    // font-size: 14px;
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.remember-me {
+  color: var(--primary);
+}
+
+.remember-me input {
+  margin-right: 5px;
+}
+
+.forgot-password-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+.login-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:disabled {
+    background-color: #ccc; /* Gray color for disabled state */
+    color: #666; /* Adjust text color */
+    cursor: not-allowed; /* Change cursor to not-allowed */
+    pointer-events: none; /* Disable hover effects */
+  }
+}
+
+.login-btn:hover {
+  background-color: #042b72;
+}
+
+.login-btn:active {
+  background-color: #042b72;
+}
