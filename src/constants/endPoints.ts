@@ -35,12 +35,41 @@ export const services = {
   deleteConsultant: { url: "consultants/v1/admin/{id}", type: "DELETE" },
   getOneConsultant: { url: "consultants/v1/admin/{id}", type: "GET" },
 
-  // Projects
+  // Projects admin
   getProjects: { url: "projects/v1/admin", type: "GET" },
   createProject: { url: "projects/v1/admin", type: "POST" },
   updateProject: { url: "projects/v1/admin/{id}", type: "PUT" },
   deleteProject: { url: "projects/v1/admin/{id}", type: "DELETE" },
   getOneProject: { url: "projects/v1/admin/{id}", type: "GET" },
+
+  // Projects employee
+  getProjectsForEmp: { url: "projects/v1/employee", type: "GET" },
+  getOneProjectForEmp: { url: "projects/v1/employee/{id}", type: "GET" },
+
+  // Projects consultant
+  getProjectsForConsultant: { url: "projects/v1/consultant", type: "GET" },
+  getOneProjectForConsultant: {
+    url: "projects/v1/consultant/{id}",
+    type: "GET",
+  },
+
+  // operationalRequests
+  getOperationalRequests: {
+    url: "/project_requests/v1/employee/project",
+    type: "GET",
+  },
+  getOperationalRequestsForEmp: {
+    url: "/projects/v1/employee",
+    type: "GET",
+  },
+  createOperationalRequest: {
+    url: "project_requests/v1/employee",
+    type: "POST",
+  },
+  getOneOperationalRequest: {
+    url: "/project_requests/v1/employee/project/{id}",
+    type: "GET",
+  },
 
   // departments
   getDepartments: { url: "departments/v1/admin", type: "GET" },
@@ -74,7 +103,7 @@ export const services = {
   },
 
   // images
-  uploadImage: { url: "upload/v1/dashboard/image", type: "POST" },
-  uploadMultibleImages: { url: "upload/v1/dashboard/images", type: "POST" },
-  deleteImage: { url: "upload/v1/dashboard/{filename}", type: "DELETE" },
+  uploadImage: { url: "upload/v1/admin/file", type: "POST" },
+  uploadMultibleImages: { url: "upload/v1/admin/files", type: "POST" },
+  deleteImage: { url: "upload/v1/admin/{filename}", type: "DELETE" },
 } as const;

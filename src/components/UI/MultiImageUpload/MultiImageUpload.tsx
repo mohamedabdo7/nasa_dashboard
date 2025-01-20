@@ -128,7 +128,7 @@ const MultiImageUpload: FC<ImageProp> = ({
           showToast(t("toasts.imageSize"), "error");
           return;
         }
-        formData.append("images", file);
+        formData.append("files", file);
       });
       upload(formData);
       e.target.value = ""; // Reset the input value
@@ -231,30 +231,6 @@ const MultiImageUpload: FC<ImageProp> = ({
           <small style={{ color: "red" }}>{formik?.errors[name]}</small>
         </div>
       ) : null}
-
-      {/* React Bootstrap Modal */}
-      {/* <Modal show={isOpen} onHide={() => setIsOpen(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>{t("image.deleteImage")}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{t("image.confirmDelete")}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setIsOpen(false)}>
-            {t("actions.cancel")}
-          </Button>
-          <Button
-            variant="danger"
-            onClick={async () => {
-              if (imageToDelete) {
-                await deletePhoto(imageToDelete);
-                setIsOpen(false);
-              }
-            }}
-          >
-            {t("actions.delete")}
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
 
       <Modal
         isOpen={isOpen}

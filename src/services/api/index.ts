@@ -12,6 +12,7 @@ import {
   CreateEmployeePayload,
   CreateEmployeeResponse,
   CreateProjectPayload,
+  CreateRequestPayload,
   Project,
   ProjectResponse,
   ProjectsListResponse,
@@ -69,7 +70,8 @@ export const ConsultantloginService = async (
 
 export const loginService = async (
   payload: LoginPayload
-): Promise<ApiResponse<LoginResponse>> => {
+  // ): Promise<ApiResponse<LoginResponse>> => {
+): Promise<any> => {
   try {
     // Define the mapping for user types to their respective endpoints
     const endpoints: Record<
@@ -148,6 +150,7 @@ export const updatePassword = async (payload: {
 export const getEmployees = async (payload?: {
   pageNumber?: number;
   limit?: number;
+  search?: string;
 }): Promise<any> => {
   try {
     return await api.send<any>("getEmployees", payload);
@@ -403,6 +406,101 @@ export const deleteProject = async (id: string): Promise<void> => {
     await api.send<void>("deleteProject", { id });
   } catch (error) {
     console.error("Error deleting project:", error);
+    throw error;
+  }
+};
+
+// Employees projects
+export const getProjectsForEmp = async (payload?: {
+  pageNumber?: number;
+  limit?: number;
+}): Promise<ProjectsListResponse> => {
+  try {
+    const response = await api.send<ProjectsListResponse>(
+      "getProjectsForEmp",
+      payload
+    );
+    return response;
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    throw error;
+  }
+};
+export const getOneProjectForEmp = async (id: string): Promise<Project> => {
+  try {
+    const response = await api.send<Project>("getOneProjectForEmp", { id });
+    return response;
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    throw error;
+  }
+};
+
+// Employees consultants
+export const getProjectsForConsultant = async (payload?: {
+  pageNumber?: number;
+  limit?: number;
+}): Promise<ProjectsListResponse> => {
+  try {
+    const response = await api.send<ProjectsListResponse>(
+      "getProjectsForConsultant",
+      payload
+    );
+    return response;
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    throw error;
+  }
+};
+export const getOneProjectForConsultant = async (
+  id: string
+): Promise<Project> => {
+  try {
+    const response = await api.send<Project>("getOneProjectForConsultant", {
+      id,
+    });
+    return response;
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    throw error;
+  }
+};
+
+// Operational Requests
+export const getOperationalRequestsForEmp = async (payload?: {
+  pageNumber?: number;
+  limit?: number;
+}): Promise<any> => {
+  try {
+    const response = await api.send<any>(
+      "getOperationalRequestsForEmp",
+      payload
+    );
+    return response;
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    throw error;
+  }
+};
+
+export const createOperationalRequest = async (
+  payload: CreateRequestPayload
+): Promise<any> => {
+  try {
+    const response = await api.send<any>("createOperationalRequest", payload);
+    return response;
+  } catch (error) {
+    console.error("Error creating project:", error);
+    throw error;
+  }
+};
+
+export const getOneOperationalRequest = async (id: string): Promise<any> => {
+  try {
+    const response = await api.send<any>("getOneOperationalRequest", { id });
+    return response;
+  } catch (error) {
+    console.error("Error fetching project:", error);
     throw error;
   }
 };

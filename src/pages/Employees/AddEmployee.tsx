@@ -15,6 +15,7 @@ import { showToast } from "../../utils";
 import { routes } from "../../constants";
 import EasyAccess from "../../components/UI/Breadcrumb/EasyAccess";
 import { useNavigate } from "react-router-dom";
+import NewImage from "../../components/UI/ImageInput/ImageInput";
 
 const AddEmployee: React.FC = () => {
   const { t } = useTranslation();
@@ -96,30 +97,9 @@ const AddEmployee: React.FC = () => {
     // image: Yup.mixed().required(t("validation.imageRequired")),
   });
 
-  // const validationSchema2 = Yup.object().shape({
-  //   name: Yup.string()
-  //     .min(4, t("validation.nameMin"))
-  //     .max(30, t("validation.nameMax"))
-  //     .required(t("validation.nameRequired")),
-  //   email: Yup.string()
-  //     .email(t("validation.emailInvalid"))
-  //     .required(t("validation.emailRequired")),
-  //   type: Yup.string().required(t("validation.typeRequired")),
-  //   password: Yup.string()
-  //     .required(t("validation.passwordRequired"))
-  //     .matches(
-  //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-  //       t("validation.passwordInvalid")
-  //     ),
-  //   confirmPassword: Yup.string()
-  //     .required(t("validation.confirmPasswordRequired"))
-  //     .oneOf([Yup.ref("password"), null], t("validation.passwordMismatch")),
-  //   // roleId: Yup.string().required(t("validation.roleRequired")),
-  //   // image: Yup.mixed().required(t("validation.imageRequired")),
-  // });
-
   const formik = useFormik({
     initialValues: {
+      image: "",
       name: "",
       email: "",
       type: "",
@@ -131,14 +111,11 @@ const AddEmployee: React.FC = () => {
     onSubmit: async (values) => {
       const formData = {
         ...values,
-        image: "/uploads/111.png", // Include image file
       };
       delete (formData as { type?: unknown }).type;
       addEmpHandler(formData);
     },
   });
-
-  console.log("selectedType", formik.errors);
 
   const addEmpHandler = async (payload: CreateEmployeePayload) => {
     setLoading(true);
@@ -188,6 +165,15 @@ const AddEmployee: React.FC = () => {
       <form onSubmit={formik.handleSubmit}>
         <SectionContainer header={t("employees.employeeInfo")}>
           <Row className="gy-3">
+            <Col sm={12} className="mb-3">
+              <NewImage
+                formik={formik}
+                name="image"
+                title={t("projects.photo")}
+                uploadMsg={t("projects.uploadPhoto")}
+                required
+              />
+            </Col>
             <Col md={12} lg={12}>
               <SingleSelect
                 required

@@ -41,7 +41,7 @@ const errorHandler = (error: any) => {
         // showToast("session expired", "error");
         localStorage.removeItem("token");
         localStorage.removeItem("persist:root");
-        window.location.href = "/login";
+        window.location.href = "/";
         return;
       }, 500);
     } else {

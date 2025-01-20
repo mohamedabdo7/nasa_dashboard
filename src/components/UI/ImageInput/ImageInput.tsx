@@ -1,12 +1,13 @@
 import { FC, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { IoIosCloseCircle } from "react-icons/io";
-// import { deleteImage, uploadImage } from "../../../services";
-// import Spinner from "../Spinner";
-import { trash } from "../../../assets/icons";
+import { deleteImage, uploadImage } from "../../../services";
+// import Modal from "../../../components/UI/Modal/Modal";
 import { showToast } from "../../../utils";
 import { Spinner } from "react-bootstrap";
+import { getIn } from "formik";
+import { trash } from "../../../assets/icons";
 import Modal from "../../Modal/Modal";
+
 type ImageProp = {
   formik?: any;
   name: string;
@@ -14,6 +15,7 @@ type ImageProp = {
   title?: string;
   required?: boolean;
 };
+
 const NewImage: FC<ImageProp> = ({
   name,
   formik,
@@ -23,19 +25,20 @@ const NewImage: FC<ImageProp> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const formData = new FormData();
 
   const upload = async (data: FormData) => {
     try {
-      // setLoading(true);
-      // const { data: payload, message } = await uploadImage(data);
-      console.log("data", data);
+      setLoading(true);
+      const response = await uploadImage(data);
+      formik.setFieldValue(name, response.url);
+      // const { data: payload } = await uploadImage(data);
+      // console.log(payload);
       // formik.setFieldValue(name, payload.url);
-      // setLoading(false);
     } catch (e) {
-      console.log("err");
+      console.error("Upload failed", e);
+      // showToast("Failed to upload image", "error");
     } finally {
       setLoading(false);
     }
@@ -45,23 +48,24 @@ const NewImage: FC<ImageProp> = ({
     if (inputRef.current) {
       inputRef.current.value = ""; // Reset the value of the file input
     }
-    console.log("data", data);
 
-    // const imageAfter = data.image.split("/uploads/")[1];
+    const imageAfter = data.image.split("/uploads/")[1];
+    console.log("ima", imageAfter);
 
-    // await deleteImage({
-    //   image: imageAfter,
-    // });
-
+    await deleteImage({ filename: imageAfter });
     formik.setFieldValue(name, "");
   };
-  // const [file, setFile] = useState("");
+
+  const fieldValue = getIn(formik.values, name); // Resolve the nested field value
+  const fieldError = getIn(formik.errors, name); // Resolve the nested field error
+  const isTouched = getIn(formik.touched, name); // Check if the nested field is touched
+
   return (
     <>
       <div className="d-flex align-items-center gap-2 mb-2">
         <div
           onClick={
-            formik && formik.values[name]
+            !fieldValue
               ? () => {
                   if (inputRef.current) {
                     inputRef.current.value = "";
@@ -80,14 +84,14 @@ const NewImage: FC<ImageProp> = ({
             border: ".1rem dashed var(--primary)",
           }}
         >
-          {formik && formik.values[name] ? (
-            <div className="w-100 h-100 position-relative" onClick={() => {}}>
+          {fieldValue ? (
+            <div className="w-100 h-100 position-relative">
               <img
-                src={
-                  import.meta.env.VITE_ANDORA_URL_IMAGES_URL +
-                  formik.values[name]
-                }
+                // src={import.meta.env.VITE_ANDORA_URL_IMAGES_URL + fieldValue}
+                src={import.meta.env.VITE_NASA_URL + fieldValue}
                 className="w-100 h-100 rounded"
+                alt="uploaded"
+                crossOrigin="anonymous"
               />
               <div
                 style={{
@@ -95,7 +99,7 @@ const NewImage: FC<ImageProp> = ({
                   right: "-10px",
                   cursor: "pointer",
                 }}
-                className=" position-absolute"
+                className="position-absolute"
                 onClick={() => {
                   setIsOpen(true);
                 }}
@@ -108,18 +112,11 @@ const NewImage: FC<ImageProp> = ({
               </div>
             </div>
           ) : (
-            <>{loading ? <Spinner /> : "+"}</>
+            <>{loading ? <Spinner animation="border" /> : "+"}</>
           )}
         </div>
-        <div
-          className=" d-flex flex-column align-items-start
-         justify-content-between "
-        >
-          <span
-            style={{
-              color: "#7D7D7D",
-            }}
-          >
+        <div className="d-flex flex-column align-items-start justify-content-between">
+          <span style={{ color: "#7D7D7D" }}>
             {title} {required && "*"}
           </span>
 
@@ -127,16 +124,14 @@ const NewImage: FC<ImageProp> = ({
             style={{
               color: "#28334A",
               cursor: "pointer",
-              border: "unset",
               backgroundColor: "transparent",
             }}
             onClick={
-              formik && formik.values[name]
+              !fieldValue
                 ? () => {
                     if (inputRef.current) {
                       inputRef.current.value = "";
                       formik.setFieldValue(name, "");
-                      // setFile(""); // Reset the value of the file input
                     }
                     inputRef.current?.click();
                   }
@@ -167,19 +162,15 @@ const NewImage: FC<ImageProp> = ({
                     "image/svg+xml",
                   ];
                   if (!validTypes.includes(file.type)) {
-                    showToast(t("toasts.imageTypes"), "error");
+                    showToast("Invalid file type", "error");
                     return;
                   }
-                  // Check file size (5MB = 5 * 1024 * 1024 bytes)
                   if (file.size > 5 * 1024 * 1024) {
-                    showToast(t("toasts.imageSize"), "error");
+                    showToast("File size exceeds 5MB", "error");
                     return;
                   }
-                  formData.append(`${"image"}`, file);
+                  formData.append("file", file);
                   upload(formData);
-                  // const fileUrl = URL.createObjectURL(file);
-                  // console.log("file", fileUrl);
-                  // setFile(fileUrl);
                 }
               }}
             />
@@ -187,28 +178,27 @@ const NewImage: FC<ImageProp> = ({
         </div>
       </div>
 
-      {formik?.touched[name] && formik?.errors[name] ? (
+      {isTouched && fieldError && (
         <div className="error">
-          <small style={{ color: "red" }}>{formik?.errors[name]}</small>
+          <small style={{ color: "red" }}>{fieldError}</small>
         </div>
-      ) : null}
-      {/* <div className="error text-danger">errrrrr</div> */}
+      )}
 
       <Modal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         onConfirm={async () => {
-          await deletePhoto({ image: formik.values[name] });
+          await deletePhoto({ image: fieldValue });
           setIsOpen(false);
           showToast("Photo Deleted Successfully", "success");
         }}
         modalIcon={trash}
-        confirmBtnStyle="dangerous"
-        closeBtnText={t("actions.cancel")}
-        confirmBtnText={t("actions.delete")}
-        modalTitle={t("image.deleteImage")}
-        modalMsg={t("image.confirmDelete")}
-      ></Modal>
+        confirmBtnStyle="active"
+        closeBtnText="Cancel"
+        confirmBtnText="Delete"
+        modalTitle="Delete Image"
+        modalMsg="Are you sure you want to delete this image?"
+      />
     </>
   );
 };

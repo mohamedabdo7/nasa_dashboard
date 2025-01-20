@@ -14,6 +14,7 @@ import { routes } from "../../constants";
 import EasyAccess from "../../components/UI/Breadcrumb/EasyAccess";
 import { useNavigate } from "react-router-dom";
 import { CreateContractorPayload } from "../../types/Employee";
+import NewImage from "../../components/UI/ImageInput/ImageInput";
 
 const AddContractor: React.FC = () => {
   const { t } = useTranslation();
@@ -46,6 +47,7 @@ const AddContractor: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
+      image: "",
       nameEn: "",
       nameAr: "",
       email: "",
@@ -54,7 +56,7 @@ const AddContractor: React.FC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      const formData = { ...values, image: "/uploads/111.png" };
+      const formData = { ...values };
       addContractorHandler(formData);
     },
   });
@@ -95,6 +97,15 @@ const AddContractor: React.FC = () => {
       <form onSubmit={formik.handleSubmit}>
         <SectionContainer header={t("contractors.contractorInfo")}>
           <Row className="gy-3">
+            <Col sm={12} className="mb-3">
+              <NewImage
+                formik={formik}
+                name="image"
+                title={t("projects.photo")}
+                uploadMsg={t("projects.uploadPhoto")}
+                required
+              />
+            </Col>
             <Col md={12} lg={6}>
               <Input
                 required

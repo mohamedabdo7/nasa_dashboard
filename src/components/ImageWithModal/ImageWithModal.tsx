@@ -20,7 +20,7 @@ const ImageWithModal: React.FC<ImageWithModalProps> = ({
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
       <img
-        src={imageUrl}
+        src={import.meta.env.VITE_NASA_URL + imageUrl}
         alt={alt || "Image"}
         width={80}
         height={80}
@@ -30,9 +30,14 @@ const ImageWithModal: React.FC<ImageWithModalProps> = ({
           objectFit: "cover",
         }}
         onClick={handleModalOpen}
+        crossOrigin="anonymous"
       />
       {name && (
-        <span style={{ fontSize: "16px", fontWeight: 500 }}>{name}</span>
+        <span
+          style={{ fontSize: "16px", fontWeight: 700, color: "var(--primary)" }}
+        >
+          {name}
+        </span>
       )}
 
       <Modal
@@ -53,8 +58,9 @@ const ImageWithModal: React.FC<ImageWithModalProps> = ({
           }}
         >
           <img
-            src={imageUrl}
+            src={import.meta.env.VITE_NASA_URL + imageUrl}
             alt={alt || "Image"}
+            crossOrigin="anonymous"
             style={{
               width: "100%",
               height: "100%",

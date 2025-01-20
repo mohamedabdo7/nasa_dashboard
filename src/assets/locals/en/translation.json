@@ -17,7 +17,8 @@
     "contractors": "Contractors",
     "consultants": "Consultants",
     "projects": "Projects",
-    "operationalRequests": "Operational Requests"
+    "operationalRequests": "Operational Requests",
+    "operational-requests": "Operational Requests"
   },
 
   "inputs": {
@@ -110,6 +111,7 @@
   "placeholder": {
     "enterTitle": "Enter title",
     "enterBody": "Enter body",
+    "password": "Enter Password",
     "searchByQuestion": "Search by question Name",
     "question": "Enter Question",
     "answer": "Enter Answer",
@@ -224,6 +226,12 @@
     "consultantPlaceholder": "Select Consultant",
     "uploadImages": "Upload Images",
     "createFailed": "Failed to create project",
+    "photo": "Photo",
+    "uploadPhoto": "Upload Photo",
+    "contractor": "Contractor",
+    "subContractors": "Sub-Contractors",
+    "code": "Code",
+    "codePlaceholder": "Enter project code",
     "validation": {
       "arabicNameRequired": "Arabic Name is required",
       "englishNameRequired": "English Name is required",
@@ -239,5 +247,37 @@
       "consultantRequired": "Consultant is required",
       "imageFileSize": "Each image must be less than 5MB"
     }
+  },
+
+  "requests": {
+    "requestId": "Request ID",
+    "projectName": "Project Name",
+    "requestType": "Request Type",
+    "project": "Project",
+    "requestDescription": "Request Description",
+    "type": "Type",
+    "status": "Status",
+    "statusLabels": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "creationDate": "Creation Date",
+    "search": "Search for Requests",
+    "addRequest": "Add Request",
+    "deleteRequest": "Delete Request",
+    "deleteMsg": "Are you sure you want to delete this request?",
+    "validation": {
+      "projectRequired": "Project is required.",
+      "requestTypeRequired": "Request type is required.",
+      "descriptionRequired": "Description is required.",
+      "maxImages": "You can upload up to 5 images.",
+      "typeRequired": "Type is required."
+    },
+    "selectProject": "Select a project",
+    "requestTypePlaceholder": "Select request type",
+    "descriptionPlaceholder": "Enter request description",
+    "typePlaceholder": "Select type",
+    "uploadImages": "Upload images"
   }
 }

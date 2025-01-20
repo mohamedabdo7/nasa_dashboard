@@ -64,35 +64,36 @@ export interface CreateConsultantResponse {
 
 // Project Types
 export type Project = {
-  id: string; // Project ID
-  arabicName: string;
-  englishName: string;
-  location: string;
-  description: string;
-  startDate: string; // ISO format
-  endDate: string; // ISO format
-  projectManagerName: string;
-  mainContractorName: string;
-  consultantName: string;
-  status: "Running" | "Upcoming" | "Ended";
-  engineers: string[]; // Engineer IDs
-  subContractors: string[]; // Sub-contractor IDs
-  images?: string[]; // Uploaded image URLs
+  data: {
+    id: string; // Project ID
+    arabicName: string;
+    englishName: string;
+    location: string;
+    description: string;
+    startDate: string; // ISO format
+    endDate: string; // ISO format
+    projectManagerName: string;
+    mainContractorName: string;
+    consultantName: string;
+    status: "Running" | "Upcoming" | "Ended";
+    engineers: string[]; // Engineer IDs
+    subContractors: string[]; // Sub-contractor IDs
+    images?: string[]; // Uploaded image URLs
+  };
 };
 
 export type CreateProjectPayload = {
-  arabicName: string;
-  englishName: string;
   location: string;
-  description: string;
-  startDate: string; // ISO format
-  endDate: string; // ISO format
-  projectManagerId: string;
-  engineerIds: string[]; // Selected engineers
-  contractorId: string; // Main contractor
-  subContractorIds: string[]; // Sub-contractors
-  consultantId: string; // Consultant
-  images?: File[]; // Files for upload (optional)
+  nameAr: string; // Arabic project name
+  nameEn: string; // English project name
+  description: string; // Project description
+  managerId: string; // Project manager ID
+  engineersIds: string[]; // Engineer IDs
+  image?: string; // Path to the uploaded image
+  code?: string; // Project code (optional)
+  contractorId: string; // Main contractor ID
+  subCotractorId: string[]; // Sub-contractor IDs
+  consultantId: string; // Consultant ID
 };
 
 export type UpdateProjectPayload = Partial<CreateProjectPayload>; // Editable fields only
@@ -102,6 +103,17 @@ export type ProjectResponse = {
 };
 
 export type ProjectsListResponse = {
-  projects: Project[];
-  total: number;
+  data: {
+    rows: Project[];
+    // projects: Project[];
+    total: number;
+  };
+};
+
+export type CreateRequestPayload = {
+  projectId: string;
+  description: string;
+  images: string[];
+  requestType: string;
+  type: string;
 };

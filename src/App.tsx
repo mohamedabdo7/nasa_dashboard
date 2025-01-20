@@ -8,6 +8,7 @@ import {
   AddConsultant,
   AddContractor,
   AddEmployee,
+  AddOperationalRequest,
   AddProject,
   Consultants,
   Contractors,
@@ -16,10 +17,12 @@ import {
   EditEmployee,
   EditProject,
   Employees,
+  OperationalRequests,
   Projects,
   ViewConsultant,
   ViewContractor,
   ViewEmployee,
+  ViewOperationalRequest,
   ViewProject,
 } from "./pages";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
@@ -69,6 +72,15 @@ function App() {
             <Route path="add" element={<AddProject />} />
             <Route path="edit-project/:id" element={<EditProject />} />
             <Route path="view-project/:id" element={<ViewProject />} />
+          </Route>
+          {/* Operational Requests */}
+          <Route path={routes.OPERATIONALREQUESTS}>
+            <Route index element={<OperationalRequests />} />
+            <Route path="add" element={<AddOperationalRequest />} />
+            <Route
+              path="view-operational-request/:id"
+              element={<ViewOperationalRequest />}
+            />
           </Route>
         </Route>
       </Routes>

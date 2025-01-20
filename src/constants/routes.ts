@@ -28,6 +28,12 @@ const routes = {
   ADDPROJECT: "/projects/add",
   EDITPROJECT: "/projects/edit-project/:id",
   VIEWPROJECT: "/projects/view-project/:id",
+
+  // Operational Requests
+  OPERATIONALREQUESTS: "/operational-requests",
+  ADDOPERATIONALREQUEST: "/operational-requests/add",
+  EDITOPERATIONALREQUEST: "/operational-requests/edit-operational-request/:id",
+  VIEWOPERATIONALREQUEST: "/operational-requests/view-operational-request/:id",
 };
 
 export default routes;

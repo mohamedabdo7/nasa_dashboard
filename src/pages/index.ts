@@ -37,3 +37,14 @@ export const EditProject = lazy(
 export const ViewProject = lazy(
   () => import("./Projects/Projects/ViewProject")
 );
+
+// Operational Requests
+export const OperationalRequests = lazy(
+  () => import("./Projects/OperationalRequests/OperationalRequests")
+);
+export const AddOperationalRequest = lazy(
+  () => import("./Projects/OperationalRequests/AddRequest")
+);
+export const ViewOperationalRequest = lazy(
+  () => import("./Projects/OperationalRequests/ViewRequest")
+);

@@ -20,6 +20,7 @@ import EasyAccess from "../../components/UI/Breadcrumb/EasyAccess";
 import { useNavigate, useParams } from "react-router-dom";
 import { CreateEmployeePayload } from "../../types/Employee";
 import { generateRandomPassword } from "../../utils/generatePassword";
+import NewImage from "../../components/UI/ImageInput/UpdateImageInput";
 
 const EditEmployee: React.FC = () => {
   const { t } = useTranslation();
@@ -87,6 +88,7 @@ const EditEmployee: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
+      image: employeeData?.image || null,
       name: employeeData?.name || "",
       email: employeeData?.email || "",
       type: employeeData?.role?.department?.id || "",
@@ -159,6 +161,9 @@ const EditEmployee: React.FC = () => {
         <SectionContainer header={t("employees.employeeInfo")}>
           <Row className="gy-3">
             {/* Employee Type (Department) */}
+            <Col sm={12} className="mb-3">
+              <NewImage formik={formik} name="image" />
+            </Col>
             <Col md={12} lg={12}>
               <SingleSelect
                 readOnly
