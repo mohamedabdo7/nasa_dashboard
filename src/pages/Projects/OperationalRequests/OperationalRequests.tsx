@@ -12,65 +12,57 @@ import TableComponent from "../../../components/Table/TableComponent";
 import ModalComponent from "../../../components/ModalComponent/ModalComponent";
 import { FaExclamationCircle } from "react-icons/fa";
 import { i18n, showToast } from "../../../utils";
-import { deleteProject } from "../../../services";
+// import { deleteRequest } from "../../../services";
 import { truncateString } from "../../../utils/truncateString";
-import { useAuth } from "../../../context/AuthContext";
 
-const ProjectsList: FC = () => {
+const OperationalRequests: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const { user } = useAuth();
 
   // State management
   const [searchValue, setSearchValue] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<any>(null);
-  const [listiner, setListiner] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<any>(null);
+  const [listener, setListener] = useState(false);
 
   // Fetching data
-  const url =
-    user.type === "Employee"
-      ? "getProjectsForEmp"
-      : user.type === "Consultant"
-      ? "getProjectsForConsultant"
-      : "getProjects"; // API endpoint for projects
+  const url = "getOperationalRequestsForEmp"; // API endpoint for requests
   const { data, loading, count, setPageNumber, pageNumber } = useFetchTableData(
     searchValue,
     url,
     { search: searchValue },
-    listiner
+    listener
   );
 
   const memoizedData = useMemo(() => data, [data]);
 
   const handleModalClose = () => {
     setModalOpen(false);
-    setSelectedProject(null);
+    setSelectedRequest(null);
   };
 
-  const handleDeleteProject = async () => {
-    if (!selectedProject) return;
+  const handleDeleteRequest = async () => {
+    if (!selectedRequest) return;
 
     setDeleteLoading(true);
     try {
-      // Call the API service to delete the project
-      await deleteProject(selectedProject.id);
+      // Call the API service to delete the request
+      //   await deleteRequest(selectedRequest.id);
 
       // Trigger re-fetching of table data after successful deletion
-      setListiner(!listiner);
+      setListener(!listener);
 
       // Close the modal after deletion
       handleModalClose();
 
       // Show success message
-      showToast(t("projects.projectDeleted"), "success");
+      showToast(t("requests.requestDeleted"), "success");
     } catch (error) {
-      console.error("Failed to delete project:", error);
+      console.error("Failed to delete request:", error);
 
       // Show error message if the deletion fails
-      showToast(t("projects.deleteFailed"), "error");
+      showToast(t("requests.deleteFailed"), "error");
     } finally {
       setDeleteLoading(false);
     }
@@ -79,7 +71,7 @@ const ProjectsList: FC = () => {
   // Table columns definition
   const columns = [
     {
-      Header: t("projects.projectId"),
+      Header: t("requests.requestId"),
       accessor: "id",
       disableSortBy: true,
       Cell: ({ row }: any) => (
@@ -91,69 +83,71 @@ const ProjectsList: FC = () => {
       ),
     },
     {
-      Header: t("projects.projectName"),
-      accessor: i18n.language === "en" ? "nameEn" : "nameAr",
+      Header: t("requests.projectName"),
+      accessor: i18n.language === "en" ? "project.nameEn" : "project.nameAr",
       disableSortBy: true,
       Cell: ({ row }: any) => (
         <div className="d-flex">
           <span className="ms-2">
             {i18n.language === "en"
-              ? truncateString(row.original.nameEn, i18n.language !== "en", 20)
-              : truncateString(row.original.nameAr, i18n.language !== "en", 20)}
+              ? truncateString(row.original?.nameEn, false, 20)
+              : truncateString(row.original?.nameAr, false, 20)}
           </span>
         </div>
       ),
     },
+    // {
+    //   Header: t("requests.requestType"),
+    //   accessor: "type",
+    //   disableSortBy: true,
+    //   Cell: ({ row }: any) => (
+    //     <div className="d-flex">
+    //       <span className="ms-2">{row.original.type}</span>
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   Header: t("requests.requestDescription"),
+    //   accessor: "description",
+    //   disableSortBy: true,
+    //   Cell: ({ row }: any) => (
+    //     <div className="d-flex">
+    //       <span className="ms-2">
+    //         {truncateString(row.original.description, false, 30)}
+    //       </span>
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   Header: t("requests.type"),
+    //   accessor: "typeCategory",
+    //   disableSortBy: true,
+    //   Cell: ({ row }: any) => (
+    //     <div className="d-flex">
+    //       <span className="ms-2">{row.original.typeCategory}</span>
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   Header: t("requests.status"),
+    //   accessor: "status",
+    //   disableSortBy: true,
+    //   Cell: ({ row }: any) => (
+    //     <div className="d-flex">
+    //       <span className="ms-2">
+    //         {t(`requests.status.${row.original.status}`)}
+    //       </span>
+    //     </div>
+    //   ),
+    // },
     {
-      Header: t("projects.manager"),
-      accessor: "manager.name",
+      Header: t("requests.creationDate"),
+      accessor: "createdAt",
       disableSortBy: true,
       Cell: ({ row }: any) => (
         <div className="d-flex">
           <span className="ms-2">
-            {truncateString(
-              row?.original?.manager?.name,
-              i18n.language !== "en",
-              20
-            )}
-          </span>
-        </div>
-      ),
-    },
-    {
-      Header: t("projects.mainContractor"),
-      accessor: "mainContractor.nameEn",
-      disableSortBy: true,
-      Cell: ({ row }: any) => (
-        <div className="d-flex">
-          <span className="ms-2">
-            {i18n.language === "en"
-              ? truncateString(
-                  row.original?.mainContractor?.nameEn,
-                  i18n.language !== "en",
-                  20
-                )
-              : truncateString(
-                  row.original?.mainContractor?.nameAr,
-                  i18n.language !== "en",
-                  20
-                )}
-          </span>
-        </div>
-      ),
-    },
-    {
-      Header: t("projects.consultant"),
-      accessor: "consultant.name",
-      disableSortBy: true,
-      Cell: ({ row }: any) => (
-        <div className="d-flex">
-          <span className="ms-2">
-            {truncateString(
-              row?.original?.consultant?.name,
-              i18n.language !== "en",
-              20
-            )}
+            {new Date(row.original.createdAt).toLocaleDateString()}
           </span>
         </div>
       ),
@@ -164,18 +158,17 @@ const ProjectsList: FC = () => {
       disableSortBy: true,
       Cell: ({ row }: any) => (
         <ActionsMenu
-          onEdit={() =>
-            navigate(
-              routes.EDITPROJECT.replace(":id", row.original.id.toString())
-            )
+          onEdit={
+            () => {}
+            // navigate(routes.EDITREQUEST.replace(":id", row.original.id))
           }
-          onView={() =>
+          onView={() => {
             navigate(
-              routes.VIEWPROJECT.replace(":id", row.original.id.toString())
-            )
-          }
+              routes.VIEWOPERATIONALREQUEST.replace(":id", row.original.id)
+            );
+          }}
           onDelete={() => {
-            setSelectedProject(row.original);
+            setSelectedRequest(row.original);
             setModalOpen(true);
           }}
         />
@@ -186,7 +179,7 @@ const ProjectsList: FC = () => {
   return (
     <Container fluid>
       <Stack direction="vertical">
-        {/* Search and Add Project Row */}
+        {/* Search and Add Request Row */}
         <Row>
           <Col lg={10} md={12}>
             <SearchInput
@@ -195,14 +188,14 @@ const ProjectsList: FC = () => {
               leftIcon={<GoSearch />}
               inputMode="search"
               onChange={(e: any) => setSearchValue(e.target.value)}
-              placeholder={t("projects.search")}
+              placeholder={t("requests.search")}
             />
           </Col>
 
           <Col md={12} lg={2}>
             <Button
-              onClick={() => navigate(routes.ADDPROJECT)}
-              text={t("projects.addProject")}
+              onClick={() => navigate(routes.ADDOPERATIONALREQUEST)}
+              text={t("requests.addRequest")}
               type="button"
               style={{ height: "49.6px", fontSize: "14px", margin: "1rem 0" }}
             />
@@ -226,18 +219,14 @@ const ProjectsList: FC = () => {
         )}
       </Stack>
 
-      {/* Delete Project Modal */}
+      {/* Delete Request Modal */}
       {isModalOpen && (
         <ModalComponent
           isOpen={isModalOpen}
           onClose={handleModalClose}
-          onConfirm={handleDeleteProject}
-          modalTitle={t("projects.deleteProject")}
-          modalMessage={`${t("projects.deleteMsg")} “${
-            i18n.language === "en"
-              ? selectedProject?.nameEn
-              : selectedProject?.nameAr
-          }“?`}
+          onConfirm={handleDeleteRequest}
+          modalTitle={t("requests.deleteRequest")}
+          modalMessage={`${t("requests.deleteMsg")} “${selectedRequest?.id}“?`}
           confirmBtnText={t("buttons.delete")}
           cancelBtnText={t("buttons.cancel")}
           loading={deleteLoading}
@@ -248,4 +237,4 @@ const ProjectsList: FC = () => {
   );
 };
 
-export default ProjectsList;
+export default OperationalRequests;

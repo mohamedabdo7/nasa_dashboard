@@ -2,10 +2,7 @@ import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 // import { useLocation } from "react-router-dom";
 // import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import {
-  logo,
-  // ServiceRequests,
-} from "../../assets/icons";
+
 import "./Menu.scss";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { routes } from "../../constants";
@@ -23,6 +20,7 @@ import { useAuth } from "../../context/AuthContext";
 
 const MySidebar = () => {
   // const location = useLocation();
+  const { user } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
@@ -107,7 +105,7 @@ const MySidebar = () => {
   const { logout } = useAuth();
   const handleLogout = () => {
     logout(); // Call the logout function
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -135,7 +133,7 @@ const MySidebar = () => {
       </div>
       <div className="logo d-flex justify-content-center mt-3 ">
         <img
-          src={logo}
+          src={"https://nasagulf.com/uploads/logo/-2-1616668986.WebP"}
           style={
             !collapsed
               ? {
@@ -159,34 +157,40 @@ const MySidebar = () => {
       >
         <Menu rootStyles={{ background: "transparent" }}>
           {/* Employees */}
-          <MenuItem
-            icon={<MdSupervisorAccount />}
-            className="no-hover-effect"
-            rootStyles={menuItemStyle(routes.EMPLOYEES)}
-            component={<Link to={routes.EMPLOYEES} />}
-          >
-            {t("sidebar.employees")}
-          </MenuItem>
+          {user.type === "Admin" && (
+            <MenuItem
+              icon={<MdSupervisorAccount />}
+              className="no-hover-effect"
+              rootStyles={menuItemStyle(routes.EMPLOYEES)}
+              component={<Link to={routes.EMPLOYEES} />}
+            >
+              {t("sidebar.employees")}
+            </MenuItem>
+          )}
 
           {/* Contractors */}
-          <MenuItem
-            icon={<MdSupervisorAccount />}
-            className="no-hover-effect"
-            rootStyles={menuItemStyle(routes.CONTRACTORS)}
-            component={<Link to={routes.CONTRACTORS} />}
-          >
-            {t("sidebar.contractors")}
-          </MenuItem>
+          {user.type === "Admin" && (
+            <MenuItem
+              icon={<MdSupervisorAccount />}
+              className="no-hover-effect"
+              rootStyles={menuItemStyle(routes.CONTRACTORS)}
+              component={<Link to={routes.CONTRACTORS} />}
+            >
+              {t("sidebar.contractors")}
+            </MenuItem>
+          )}
 
           {/* Consultants */}
-          <MenuItem
-            icon={<MdSupervisorAccount />}
-            className="no-hover-effect"
-            rootStyles={menuItemStyle(routes.CONSULTANTS)}
-            component={<Link to={routes.CONSULTANTS} />}
-          >
-            {t("sidebar.consultants")}
-          </MenuItem>
+          {user.type === "Admin" && (
+            <MenuItem
+              icon={<MdSupervisorAccount />}
+              className="no-hover-effect"
+              rootStyles={menuItemStyle(routes.CONSULTANTS)}
+              component={<Link to={routes.CONSULTANTS} />}
+            >
+              {t("sidebar.consultants")}
+            </MenuItem>
+          )}
 
           {/* services */}
           <Menu
@@ -211,7 +215,7 @@ const MySidebar = () => {
               label={t("sidebar.projects")}
               rootStyles={menuItemStyle("Projects", [
                 routes.PROJECTS,
-                // routes.SERVICESINFO,
+                routes.OPERATIONALREQUESTS,
               ])}
               style={{
                 fontSize: "small",
@@ -225,8 +229,10 @@ const MySidebar = () => {
                 {t("sidebar.projects")}
               </MenuItem>
               <MenuItem
-                rootStyles={submenuItemStyle(routes.PROJECTS)}
-                component={<Link to={routes.PROJECTS} style={linkStyle} />}
+                rootStyles={submenuItemStyle(routes.OPERATIONALREQUESTS)}
+                component={
+                  <Link to={routes.OPERATIONALREQUESTS} style={linkStyle} />
+                }
               >
                 {t("sidebar.operationalRequests")}
               </MenuItem>

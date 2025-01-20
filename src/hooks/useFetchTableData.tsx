@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import useDebounce from "./useDebounce";
 import api from "../services/api/api";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
 interface FetchError {
   message: string;
@@ -12,15 +12,15 @@ export const useFetchTableData = (
   url: any,
   payload?: any,
   listiner?: any,
-  canFetch: boolean = true,
-  isOnlySearch: boolean = false
+  canFetch: boolean = true
+  // isOnlySearch: boolean = false
 ) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<FetchError | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [count, setCount] = useState(0);
-  const { i18n } = useTranslation();
+  // const { i18n } = useTranslation();
   const debouncedSearchValue = useDebounce(searchValue, 1000);
 
   const isInitialRender = useRef(true);

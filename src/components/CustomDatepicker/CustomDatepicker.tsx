@@ -54,10 +54,11 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
                       ? "red"
                       : "var(--gray)"
                   }`,
-                  backgroundColor: "var(--white-floating)",
+                  backgroundColor: "var(--white)",
                   top: "-11px",
                   left: "25px",
                   zIndex: "1",
+                  padding: "0 5px",
                   ...labelStyle,
                 }
               : {
@@ -80,7 +81,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
       </div>
       <DatePicker
         name={name}
-        required={required}
+        // required={required}
         disabled={disabled}
         selected={selectedDate}
         onChange={onChange}

@@ -7,7 +7,7 @@ type InputProps = {
   labelStyle?: any;
   name: string;
   placeholder?: string;
-  type: string;
+  type?: string;
   labelName?: string;
   icon?: any;
   isIcon?: boolean;
@@ -55,7 +55,7 @@ const Input: React.FC<InputProps> = ({
   onChangeValue,
   checked,
   value,
-  type,
+  type = "text",
   labelName,
   autoComplete,
   inputMode,

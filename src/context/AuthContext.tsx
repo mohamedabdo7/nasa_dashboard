@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 interface AuthContextType {
   user: any; // User data (can be more specific)
   token: string | null;
-  login: (data: { token: string; admin: any }) => void; // The login function accepts the user data and token
+  login: (data: { token: string; admin: any; type: string }) => void; // The login function accepts the user data and token
   logout: () => void;
   isAuthenticated: boolean; // This will check if the user is authenticated
 }
@@ -31,8 +31,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const isAuthenticated = !!token;
 
   // Handle login
-  const login = (data: { token: string; admin: any }) => {
-    setUser(data.admin);
+  const login = (data: { token: string; admin: any; type: string }) => {
+    setUser({ ...data.admin, type: data.type });
     setToken(data.token);
     localStorage.setItem("user", JSON.stringify(data.admin)); // Store user data in localStorage
     localStorage.setItem("token", `"Bearer ${data.token}"`); // Store token in localStorage
@@ -62,62 +62,3 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
-
-// // src/context/AuthContext.tsx
-// import React, { createContext, useContext, useState, ReactNode } from "react";
-
-// // Define context
-// interface AuthContextType {
-//   user: any; // User data (can be more specific)
-//   token: string | null;
-//   login: (data: { token: string; user: any }) => void; // The login function accepts the user data and token
-//   logout: () => void;
-//   isAuthenticated: boolean; // This will check if the user is authenticated
-// }
-
-// const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// // AuthProvider component to provide context value to children
-// interface AuthProviderProps {
-//   children: ReactNode; // Define 'children' prop type
-// }
-
-// export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-//   const [user, setUser] = useState<any>(null);
-//   const [token, setToken] = useState<string | null>(null);
-
-//   // Check if the user is authenticated
-//   const isAuthenticated = token !== null;
-
-//   // Handle login
-//   const login = (data: { token: string; user: any }) => {
-//     setUser(data.user);
-//     setToken(data.token);
-//     localStorage.setItem("user", JSON.stringify(data.user)); // Optionally, store user data in localStorage
-//     localStorage.setItem("token", `"Bearer ${data.token}"`); // Optionally, store token in localStorage
-//   };
-
-//   // Handle logout
-//   const logout = () => {
-//     setUser(null);
-//     setToken(null);
-//     localStorage.removeItem("user");
-//     localStorage.removeItem("token");
-//   };
-
-//   return (
-//     <AuthContext.Provider
-//       value={{ user, token, login, logout, isAuthenticated }}
-//     >
-//       {children} {/* Render children passed to the provider */}
-//     </AuthContext.Provider>
-//   );
-// };
-
-// export const useAuth = (): AuthContextType => {
-//   const context = useContext(AuthContext);
-//   if (!context) {
-//     throw new Error("useAuth must be used within an AuthProvider");
-//   }
-//   return context;
-// };
