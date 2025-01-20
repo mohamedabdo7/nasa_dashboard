@@ -14,6 +14,7 @@ enum UserType {
 }
 
 const Login: React.FC = () => {
+  const { user } = useAuth();
   const { login } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -57,8 +58,11 @@ const Login: React.FC = () => {
         } else {
           localStorage.removeItem("rememberedEmail");
         }
-
-        navigate(routes.EMPLOYEES);
+        if (user.type === "Admin") {
+          navigate(routes.EMPLOYEES);
+        } else {
+          navigate(routes.PROJECTS);
+        }
       } else {
         setError("Invalid credentials. Please try again.");
       }

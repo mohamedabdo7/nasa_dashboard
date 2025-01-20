@@ -1,6 +1,6 @@
 import React from "react";
 
-const EditProject = () => {
+const EditProject: React.FC = () => {
   return <div>EditProject</div>;
 };
 

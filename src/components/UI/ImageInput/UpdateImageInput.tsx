@@ -48,7 +48,7 @@ const NewImage: FC<ImageProp> = ({ name, formik }) => {
     console.log("ima", imageAfter);
 
     const { data: payload, message } = await deleteImage({
-      image: data.image.split("/uploads/")[1],
+      filename: data.image.split("/uploads/")[1],
     });
     console.log("data", payload, message);
 

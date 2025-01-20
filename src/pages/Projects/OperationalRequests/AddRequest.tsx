@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import { Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import PaginatedSelect from "../../../components/PaginatedSelect/PaginatedSelect";
+// import PaginatedSelect from "../../../components/PaginatedSelect/PaginatedSelect";
 import SingleSelect from "../../../components/UI/Multi-Select/SingleSelect";
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
-import NewImage from "../../../components/UI/ImageInput/ImageInput";
+// import NewImage from "../../../components/UI/ImageInput/ImageInput";
 import { getProjects, createOperationalRequest } from "../../../services";
 import { showToast } from "../../../utils";
 import { useNavigate } from "react-router-dom";
@@ -53,19 +53,19 @@ const AddRequest: React.FC = () => {
   }, []);
 
   // Validation schema
-  const validationSchema = Yup.object().shape({
-    projectId: Yup.string().required(t("requests.validation.projectRequired")),
-    requestType: Yup.string().required(
-      t("requests.validation.requestTypeRequired")
-    ),
-    description: Yup.string().required(
-      t("requests.validation.descriptionRequired")
-    ),
-    images: Yup.array()
-      .of(Yup.string())
-      .max(5, t("requests.validation.maxImages")),
-    type: Yup.string().required(t("requests.validation.typeRequired")),
-  });
+  // const validationSchema = Yup.object().shape({
+  //   projectId: Yup.string().required(t("requests.validation.projectRequired")),
+  //   requestType: Yup.string().required(
+  //     t("requests.validation.requestTypeRequired")
+  //   ),
+  //   description: Yup.string().required(
+  //     t("requests.validation.descriptionRequired")
+  //   ),
+  //   images: Yup.array()
+  //     .of(Yup.string())
+  //     .max(5, t("requests.validation.maxImages")),
+  //   type: Yup.string().required(t("requests.validation.typeRequired")),
+  // });
 
   // Formik setup
   const formik = useFormik<FormValues>({
