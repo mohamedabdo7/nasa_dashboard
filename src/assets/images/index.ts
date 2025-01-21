@@ -28,3 +28,4 @@ export { default as technicalConsultancyIcon } from "./technical-consultancy-ico
 export { default as uiUxIcon } from "./ui-ux-icon.svg";
 
 export { default as footerLogo } from "./footer-logo.svg";
+export { default as logo } from "./logo.jpeg";

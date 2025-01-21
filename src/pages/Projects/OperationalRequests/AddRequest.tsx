@@ -9,11 +9,17 @@ import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 // import NewImage from "../../../components/UI/ImageInput/ImageInput";
-import { getProjects, createOperationalRequest } from "../../../services";
+import {
+  createOperationalRequest,
+  createOperationalRequestCons,
+  getProjectsForConsultant,
+  getProjectsForEmp,
+} from "../../../services";
 import { showToast } from "../../../utils";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../constants";
 import MultiImageUpload from "../../../components/UI/MultiImageUpload/MultiImageUpload";
+import { useAuth } from "../../../context/AuthContext";
 
 interface Option {
   value: string | number;
@@ -21,7 +27,7 @@ interface Option {
 }
 
 interface FormValues {
-  projectId: Option | null;
+  projectId: string;
   requestType: string;
   description: string;
   images: string[]; // Array of uploaded image paths
@@ -31,6 +37,7 @@ interface FormValues {
 const AddRequest: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [projects, setProjects] = useState<Option[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -38,19 +45,30 @@ const AddRequest: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await getProjects({ pageNumber: 1, limit: 10 });
-        const data = response.data.rows;
-        const options = data.map((project: any) => ({
-          value: project.id,
-          label: project.nameEn || project.nameAr,
-        }));
-        setProjects(options);
+        let response;
+        if (user.type === "Employee") {
+          response = await getProjectsForEmp({ pageNumber: 1, limit: 10 });
+        } else if (user.type === "Consultant") {
+          response = await getProjectsForConsultant({
+            pageNumber: 1,
+            limit: 10,
+          });
+        }
+
+        if (response) {
+          const options = response.data.rows.map((project: any) => ({
+            value: project.id,
+            label: project.nameEn || project.nameAr,
+          }));
+          setProjects(options);
+        }
       } catch (error) {
         console.error("Failed to fetch projects:", error);
       }
     };
+
     fetchProjects();
-  }, []);
+  }, [user.type]);
 
   // Validation schema
   // const validationSchema = Yup.object().shape({
@@ -70,7 +88,7 @@ const AddRequest: React.FC = () => {
   // Formik setup
   const formik = useFormik<FormValues>({
     initialValues: {
-      projectId: null,
+      projectId: "",
       requestType: "",
       description: "",
       images: [],
@@ -82,18 +100,22 @@ const AddRequest: React.FC = () => {
       try {
         const payload = {
           //   projectId: values.projectId?.value,
-          projectId: "cd2c9fa1-1fdb-497c-a2a4-bf1b4fd58e8b",
+          projectId: values.projectId,
           requestType: values.requestType,
           description: values.description,
           images: values.images,
           type: values.type,
         };
-        await createOperationalRequest(payload);
+        if (user.type === "Employee") {
+          await createOperationalRequest(payload);
+        }
+        if (user.type === "Consultant") {
+          await createOperationalRequestCons(payload);
+        }
         showToast(t("requests.requestCreated"), "success");
         navigate(routes.OPERATIONALREQUESTS);
       } catch (error) {
         console.error("Error creating request:", error);
-        showToast(t("requests.requestCreationFailed"), "error");
       } finally {
         setLoading(false);
       }
@@ -114,7 +136,7 @@ const AddRequest: React.FC = () => {
                 formik={formik}
                 name="projectId"
                 labelName={t("requests.project")}
-                onChange={(option) => formik.setFieldValue("project", option)}
+                onChange={(option) => formik.setFieldValue("projectId", option)}
               />
             </Col>
 

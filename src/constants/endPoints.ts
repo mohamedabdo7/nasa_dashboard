@@ -54,6 +54,18 @@ export const services = {
   },
 
   // operationalRequests
+  getGlobalOperationalRequests: {
+    url: "/project_requests/v1/admin?projectId={id}",
+    type: "GET",
+  },
+  getGlobalOperationalRequestsForEmp: {
+    url: "/project_requests/v1/employee?projectId={id}",
+    type: "GET",
+  },
+  getGlobalOperationalRequestsForCons: {
+    url: "/project_requests/v1/consultant?projectId={id}",
+    type: "GET",
+  },
   getOperationalRequests: {
     url: "/project_requests/v1/employee/project",
     type: "GET",
@@ -66,9 +78,17 @@ export const services = {
     url: "project_requests/v1/employee",
     type: "POST",
   },
+  createOperationalRequestCons: {
+    url: "project_requests/v1/consultant",
+    type: "POST",
+  },
   getOneOperationalRequest: {
     url: "/project_requests/v1/employee/{id}",
     type: "GET",
+  },
+  updateRequestStatus: {
+    url: "/project_requests/v1/consultant/{id}",
+    type: "PUT",
   },
 
   // departments

@@ -27,7 +27,7 @@ import {
 } from "./pages";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Login from "./pages/Auth/Login/Login";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import ForgetPassword from "./pages/Auth/ForgetPassword";
 import OtpComponent from "./pages/Auth/OTP";
 import NewPassword from "./pages/Auth/NewPassword";

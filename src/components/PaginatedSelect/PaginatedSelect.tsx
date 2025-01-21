@@ -17,6 +17,7 @@ interface PaginatedSelectProps {
   options: Option[];
   labelName?: string;
   required?: boolean;
+  disabled?: boolean;
   loadMoreOptions: (page: number, search?: string) => Promise<Option[]>;
   placeholder?: string;
   isClearable?: boolean;
@@ -31,6 +32,7 @@ const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
   options,
   labelName,
   required,
+  disabled,
   loadMoreOptions,
   placeholder = "Select an option",
   isClearable = true,
@@ -40,7 +42,7 @@ const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
   const defaultStyles = {
     control: (base: any, state: any) => ({
       ...base,
-      height: "50px",
+      height: "auto",
       minHeight: "50px",
       borderRadius: "8px",
       borderColor: state.isFocused ? "var(--primary)" : null,
@@ -88,16 +90,27 @@ const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    setAllOptions(options);
+    // Merge existing options with incoming options, avoiding duplicates
+    setAllOptions((prevOptions) => {
+      const existingValues = new Set(prevOptions.map((o) => o.value));
+      return [
+        ...prevOptions,
+        ...options.filter((o) => !existingValues.has(o.value)),
+      ];
+    });
   }, [options]);
 
   const fetchOptions = async (page: number, search?: string) => {
     setIsLoading(true);
     try {
       const newOptions = await loadMoreOptions(page, search);
-      setAllOptions((prevOptions) =>
-        page === 1 ? newOptions : [...prevOptions, ...newOptions]
-      );
+      setAllOptions((prevOptions) => {
+        const existingValues = new Set(prevOptions.map((o) => o.value));
+        return [
+          ...prevOptions,
+          ...newOptions.filter((o) => !existingValues.has(o.value)),
+        ];
+      });
       setHasMore(newOptions.length > 0); // Check if more options are available
     } catch (error) {
       console.error("Failed to fetch options:", error);
@@ -132,15 +145,6 @@ const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
     }
   };
 
-  // Add a loader at the end of the options
-  const customOptions =
-    hasMore || isLoading
-      ? [
-          ...allOptions,
-          { value: "loading", label: isLoading ? "Loading..." : "Load more" },
-        ]
-      : allOptions;
-
   return (
     <div
       className={`position-relative single-select-container`}
@@ -156,19 +160,14 @@ const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
             backgroundColor: "var(--white)",
             zIndex: "1",
             color: "var(--gray)",
-            // color: error && isTouched ? "red" : "var(--gray)",
-            // ...labelStyle,
           }}
-          // className={`rounded single-select-label ${
-          //   error && isTouched && "label-error"
-          // }`}
         >
           <span className="mx-2">{labelName}</span>
           {required && <span className="mt-1">*</span>}
         </label>
       )}
       <Select
-        options={customOptions}
+        options={allOptions}
         isClearable={isClearable}
         isMulti={isMulti}
         placeholder={placeholder}
@@ -177,12 +176,199 @@ const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
         onChange={onChange}
         menuPortalTarget={document.body}
         styles={defaultStyles}
+        isDisabled={disabled}
       />
     </div>
   );
 };
 
 export default PaginatedSelect;
+
+// import React, { useState, useEffect, useCallback } from "react";
+// import Select, {
+//   SingleValue,
+//   MultiValue,
+//   InputActionMeta,
+//   ActionMeta,
+// } from "react-select";
+// import debounce from "lodash.debounce"; // Install lodash.debounce for debouncing
+// import { i18n } from "../../utils";
+
+// interface Option {
+//   value: string | number;
+//   label: string;
+// }
+
+// interface PaginatedSelectProps {
+//   options: Option[];
+//   labelName?: string;
+//   required?: boolean;
+//   loadMoreOptions: (page: number, search?: string) => Promise<Option[]>;
+//   placeholder?: string;
+//   isClearable?: boolean;
+//   isMulti?: boolean;
+//   onChange?: (
+//     newValue: SingleValue<Option> | MultiValue<Option>,
+//     actionMeta: ActionMeta<Option>
+//   ) => void;
+// }
+
+// const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
+//   options,
+//   labelName,
+//   required,
+//   loadMoreOptions,
+//   placeholder = "Select an option",
+//   isClearable = true,
+//   isMulti = false,
+//   onChange,
+// }) => {
+//   const defaultStyles = {
+//     control: (base: any, state: any) => ({
+//       ...base,
+//       height: "50px",
+//       minHeight: "50px",
+//       borderRadius: "8px",
+//       borderColor: state.isFocused ? "var(--primary)" : null,
+//       boxShadow: "unset",
+//       "&:hover": {
+//         borderColor: "unset",
+//       },
+//       background: "transparent",
+//     }),
+//     menu: (base: any) => ({
+//       ...base,
+//       maxHeight: "160px",
+//       zIndex: "999",
+//       padding: "4px",
+//     }),
+//     menuList: (base: any) => ({
+//       ...base,
+//       maxHeight: "150px",
+//       overflowY: "auto",
+//       padding: "3px",
+//       scrollBehavior: "smooth",
+//     }),
+//     option: (base: any, state: any) => ({
+//       ...base,
+//       backgroundColor: state.isSelected
+//         ? "var(--primary)"
+//         : state.isFocused
+//         ? "#f8f9fa"
+//         : base.backgroundColor,
+//       color: state.isFocused ? "#000" : base.color,
+//       "&:hover": {
+//         backgroundColor: "var(--primary)",
+//         color: "#fff",
+//       },
+//     }),
+//     indicatorSeparator: () => ({
+//       display: "none",
+//     }),
+//   };
+
+//   const [allOptions, setAllOptions] = useState<Option[]>(options);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [page, setPage] = useState(1);
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [hasMore, setHasMore] = useState(true);
+
+//   useEffect(() => {
+//     setAllOptions(options);
+//   }, [options]);
+
+//   const fetchOptions = async (page: number, search?: string) => {
+//     setIsLoading(true);
+//     try {
+//       const newOptions = await loadMoreOptions(page, search);
+//       setAllOptions((prevOptions) =>
+//         page === 1 ? newOptions : [...prevOptions, ...newOptions]
+//       );
+//       setHasMore(newOptions.length > 0); // Check if more options are available
+//     } catch (error) {
+//       console.error("Failed to fetch options:", error);
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   const debouncedInputChange = useCallback(
+//     debounce((inputValue: string) => {
+//       setSearchTerm(inputValue);
+//       setPage(1);
+//       fetchOptions(1, inputValue);
+//     }, 300),
+//     []
+//   );
+
+//   const handleInputChange = (
+//     inputValue: string,
+//     actionMeta: InputActionMeta
+//   ) => {
+//     if (actionMeta.action === "input-change") {
+//       debouncedInputChange(inputValue);
+//     }
+//   };
+
+//   const handleMenuScrollToBottom = () => {
+//     if (!isLoading && hasMore) {
+//       const nextPage = page + 1;
+//       fetchOptions(nextPage, searchTerm);
+//       setPage(nextPage);
+//     }
+//   };
+
+//   // Add a loader at the end of the options
+//   const customOptions =
+//     hasMore || isLoading
+//       ? [
+//           ...allOptions,
+//           { value: "loading", label: isLoading ? "Loading..." : "Load more" },
+//         ]
+//       : allOptions;
+
+//   return (
+//     <div
+//       className={`position-relative single-select-container`}
+//       style={{ margin: "0.2rem" }}
+//     >
+//       {labelName && (
+//         <label
+//           style={{
+//             position: "absolute",
+//             top: "-12px",
+//             left: i18n.language === "en" ? "10px" : "",
+//             right: i18n.language === "ar" ? "10px" : "",
+//             backgroundColor: "var(--white)",
+//             zIndex: "1",
+//             color: "var(--gray)",
+//             // color: error && isTouched ? "red" : "var(--gray)",
+//             // ...labelStyle,
+//           }}
+//           // className={`rounded single-select-label ${
+//           //   error && isTouched && "label-error"
+//           // }`}
+//         >
+//           <span className="mx-2">{labelName}</span>
+//           {required && <span className="mt-1">*</span>}
+//         </label>
+//       )}
+//       <Select
+//         options={customOptions}
+//         isClearable={isClearable}
+//         isMulti={isMulti}
+//         placeholder={placeholder}
+//         onInputChange={handleInputChange}
+//         onMenuScrollToBottom={handleMenuScrollToBottom}
+//         onChange={onChange}
+//         menuPortalTarget={document.body}
+//         styles={defaultStyles}
+//       />
+//     </div>
+//   );
+// };
+
+// export default PaginatedSelect;
 
 // import React, { useState, useEffect, useCallback } from "react";
 // import Select, {

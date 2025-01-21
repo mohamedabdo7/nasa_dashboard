@@ -51,7 +51,15 @@
     "admin": "Admin",
     "employee": "Employee",
     "consultant": "Consultant",
-    "role": "Role"
+    "role": "Role",
+    "code": "Code",
+    "type": "Type",
+    "requestType": "Request Type",
+    "description": "Description",
+    "createdAt": "Created At",
+    "status": "Status",
+    "noStatus": "No Status",
+    "consultantComment": "Consultant Comment"
   },
 
   "toasts": {
@@ -251,11 +259,17 @@
   },
 
   "requests": {
+    "requestInfo": "Request Information",
+    "requests": "Requests",
+    "editRequest": "Edit Request",
+    "viewRequest": "View Request",
     "requestId": "Request ID",
     "projectName": "Project Name",
     "requestType": "Request Type",
     "project": "Project",
     "requestDescription": "Request Description",
+    "filterByProject": "Filter by Project",
+    "code": "Code",
     "type": "Type",
     "status": "Status",
     "statusLabels": {
