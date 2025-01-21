@@ -67,7 +67,7 @@ export const services = {
     type: "POST",
   },
   getOneOperationalRequest: {
-    url: "/project_requests/v1/employee/project/{id}",
+    url: "/project_requests/v1/employee/{id}",
     type: "GET",
   },
 

@@ -128,7 +128,8 @@
     "name": "Enter Name",
     "email": "Enter Email",
     "nameEn": "Enter Name (English)",
-    "nameAr": "Enter Name (Arabic)"
+    "nameAr": "Enter Name (Arabic)",
+    "userType": "Select User Type"
   },
 
   "employees": {
