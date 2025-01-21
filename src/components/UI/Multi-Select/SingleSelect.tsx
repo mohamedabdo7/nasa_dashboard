@@ -44,14 +44,23 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
       ...base,
       height: "50px",
       minHeight: "50px",
-      border: hasError ? "1px solid red" : "1px solid #7D7D7D", // Apply red border if there's an error
+      border: hasError ? "1px solid red" : "1px solid var(--primary)", // Apply red border if there's an error
       borderRadius: "8px",
       borderColor: state.isFocused ? "var(--primary)" : null,
       boxShadow: "unset",
-      "&:hover": {
-        borderColor: "unset",
-      },
+      // "&:hover": {
+      //   borderColor: "unset",
+      // },
       background: "transparent",
+      textAlign: "left", // Ensure the text alignment is to the left
+      display: "flex", // Ensure proper layout for child elements
+      color: "var(--primary)",
+    }),
+    valueContainer: (base: any) => ({
+      ...base,
+      textAlign: "left", // Align text to the left
+      paddingLeft: "10px", // Add padding for better spacing
+      color: "var(--primary) 1",
     }),
     menu: (base: any) => ({
       ...base,
@@ -74,10 +83,17 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
         : base.backgroundColor,
 
       color: state.isFocused ? "#000" : base.color,
+      textAlign: "left",
       "&:hover": {
         backgroundColor: "var(--primary)",
         color: "#fff",
       },
+    }),
+    placeholder: (base: any) => ({
+      ...base,
+      textAlign: "left", // Align placeholder text to the start
+      color: "var(--primary)", // Optional: Placeholder color
+      margin: "0", // Remove any default margin
     }),
     indicatorSeparator: () => ({
       display: "none",
@@ -100,7 +116,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
             right: `${i18n.language === "ar" && "10px"}`,
             backgroundColor: "var(--white)",
             zIndex: "1",
-            color: "var(--gray)",
+            color: "var(--primary)",
             ...labelStyle,
           }}
           className={`rounded single-select-label ${
