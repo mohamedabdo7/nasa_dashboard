@@ -17,6 +17,7 @@ import { MdSupervisorAccount } from "react-icons/md";
 import { i18n } from "../../utils";
 import Button from "../UI/Button";
 import { useAuth } from "../../context/AuthContext";
+import { logo } from "../../assets/images";
 
 const MySidebar = () => {
   // const location = useLocation();
@@ -40,12 +41,12 @@ const MySidebar = () => {
     padding: "0",
     background:
       isActiveRoute(route) || isSubmenuActive(submenuRoutes)
-        ? "#3F67B1"
+        ? "#0c1f38"
         : "#EBF0FF",
     color:
       isActiveRoute(route) || isSubmenuActive(submenuRoutes)
         ? "#FFF"
-        : "#3F67B1",
+        : "#0c1f38",
     margin: "1rem 0",
     borderRadius: "8px",
   });
@@ -53,7 +54,7 @@ const MySidebar = () => {
   const submenuItemStyle = (route: any) => ({
     background: isActiveRoute(route) ? "#trasparent" : "",
     fontWeight: isActiveRoute(route) ? "700" : "400",
-    color: isActiveRoute(route) ? "#3F67B1" : "#568df5",
+    color: isActiveRoute(route) ? "#0c1f38" : "#568df5",
     margin: "0.5rem 0",
     borderRadius: "8px",
     padding: "0.5rem 0.4rem ",
@@ -92,7 +93,7 @@ const MySidebar = () => {
     zIndex: "1000",
     border: "0",
     transform: "translate(-50%, -50%)",
-    background: "#3F67B1",
+    background: "#0c1f38",
     color: "white",
     display: "flex",
     justifyContent: "center",
@@ -133,7 +134,7 @@ const MySidebar = () => {
       </div>
       <div className="logo d-flex justify-content-center mt-3 ">
         <img
-          src={"https://nasagulf.com/uploads/logo/-2-1616668986.WebP"}
+          src={logo}
           style={
             !collapsed
               ? {
@@ -228,6 +229,7 @@ const MySidebar = () => {
               >
                 {t("sidebar.projects")}
               </MenuItem>
+              {/* {user.type === "Employee" && ( */}
               <MenuItem
                 rootStyles={submenuItemStyle(routes.OPERATIONALREQUESTS)}
                 component={
@@ -236,6 +238,7 @@ const MySidebar = () => {
               >
                 {t("sidebar.operationalRequests")}
               </MenuItem>
+              {/* )} */}
             </SubMenu>
           </Menu>
         </Menu>

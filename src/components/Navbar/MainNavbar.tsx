@@ -65,7 +65,7 @@ const MainNavbar: FC = () => {
           {
             !place ? (
               <div className="fw-bold" style={{ color: "var(--primary)" }}>
-                {t(`breadcrumbs.heroSection`)}
+                {t(`breadcrumbs.employees`)}
               </div>
             ) : (
               <div className="fw-bold" style={{ color: "var(--primary)" }}>

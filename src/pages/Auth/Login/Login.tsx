@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Spinner } from "react-bootstrap";
 import { loginService } from "../../../services";
 import SingleSelect from "../../../components/UI/Multi-Select/SingleSelect";
+import { logo } from "../../../assets/images";
 
 enum UserType {
   Admin = "Admin",
@@ -92,7 +93,7 @@ const Login: React.FC = () => {
       <div className="login-box w-100 d-flex flex-column  justify-content-center">
         <div>
           <img
-            src={"https://nasagulf.com/uploads/logo/-2-1616668986.WebP"}
+            src={logo}
             alt="login"
             style={{ width: "300px", height: "auto" }}
           />

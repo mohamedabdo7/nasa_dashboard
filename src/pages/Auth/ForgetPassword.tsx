@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import { Spinner } from "react-bootstrap";
 import { ForgetPasswordPayload } from "../../types/login";
 import { forgetPasswordService } from "../../services";
-import { loginIcon } from "../../assets/icons";
 import { routes } from "../../constants";
+import { logo } from "../../assets/images";
 
 const ForgetPassword: FC = () => {
   const navigate = useNavigate();
@@ -47,8 +47,10 @@ const ForgetPassword: FC = () => {
 
   return (
     <div className="login-container">
-      <div className="login-box">
-        <img src={loginIcon} alt="login" style={{ width: "300px" }} />
+      <div className="login-box d-flex flex-column justify-content-center">
+        <div className="my-4">
+          <img src={logo} alt="login" style={{ width: "300px" }} />
+        </div>
         <h5
           style={{
             fontSize: "20px",

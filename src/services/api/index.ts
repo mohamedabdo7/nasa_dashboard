@@ -467,6 +467,22 @@ export const getOneProjectForConsultant = async (
 };
 
 // Operational Requests
+export const getGlobalOperationalRequests = async (payload?: {
+  pageNumber?: number;
+  limit?: number;
+  id?: string;
+}): Promise<any> => {
+  try {
+    const response = await api.send<any>(
+      "getGlobalOperationalRequests",
+      payload
+    );
+    return response;
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    throw error;
+  }
+};
 export const getOperationalRequestsForEmp = async (payload?: {
   pageNumber?: number;
   limit?: number;
@@ -494,6 +510,20 @@ export const createOperationalRequest = async (
     throw error;
   }
 };
+export const createOperationalRequestCons = async (
+  payload: CreateRequestPayload
+): Promise<any> => {
+  try {
+    const response = await api.send<any>(
+      "createOperationalRequestCons",
+      payload
+    );
+    return response;
+  } catch (error) {
+    console.error("Error creating project:", error);
+    throw error;
+  }
+};
 
 export const getOneOperationalRequest = async (id: string): Promise<any> => {
   try {
@@ -501,6 +531,24 @@ export const getOneOperationalRequest = async (id: string): Promise<any> => {
     return response;
   } catch (error) {
     console.error("Error fetching project:", error);
+    throw error;
+  }
+};
+
+export const updateRequestStatus = async (
+  id: string,
+  status?: boolean,
+  consultantComment?: string
+): Promise<any> => {
+  try {
+    const response = await api.send<any>("updateRequestStatus", {
+      id,
+      status,
+      consultantComment,
+    });
+    return response;
+  } catch (error) {
+    console.error("Error updating project:", error);
     throw error;
   }
 };
