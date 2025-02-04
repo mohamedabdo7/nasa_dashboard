@@ -59,7 +59,10 @@
     "createdAt": "Created At",
     "status": "Status",
     "noStatus": "No Status",
-    "consultantComment": "Consultant Comment"
+    "consultantComment": "Consultant Comment",
+    "engineerComment": "Engineer Comment",
+    "comments": "Comments",
+    "addComment": "Add Comment"
   },
 
   "toasts": {
@@ -106,7 +109,13 @@
     "delete": "Delete",
     "view": "View",
     "edit": "Edit",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "accept": "Accept",
+    "reject": "Reject",
+    "confirm": "Confirm",
+    "acceptRequest": "Accept Request",
+    "rejectRequest": "Reject Request",
+    "downloadPDF": "Download PDF"
   },
 
   "deletsMsgs": {
@@ -272,6 +281,7 @@
     "code": "Code",
     "type": "Type",
     "status": "Status",
+    "requestCreated": "Request created successfully",
     "statusLabels": {
       "pending": "Pending",
       "approved": "Approved",

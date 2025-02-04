@@ -75,6 +75,10 @@ export const services = {
     type: "GET",
   },
   createOperationalRequest: {
+    url: "project_requests/v1/admin",
+    type: "POST",
+  },
+  createOperationalRequestEmp: {
     url: "project_requests/v1/employee",
     type: "POST",
   },
@@ -83,7 +87,15 @@ export const services = {
     type: "POST",
   },
   getOneOperationalRequest: {
+    url: "/project_requests/v1/admin/{id}",
+    type: "GET",
+  },
+  getOneOperationalRequestEmp: {
     url: "/project_requests/v1/employee/{id}",
+    type: "GET",
+  },
+  getOneOperationalRequestCons: {
+    url: "/project_requests/v1/consultant/{id}",
     type: "GET",
   },
   updateRequestStatus: {
