@@ -46,13 +46,9 @@ const MultiImageUpload: FC<ImageProp> = ({
       setLoading(true);
       // const { data: payload } = await uploadMultibleImages(data);
       const payload: any = await uploadMultibleImages(data);
-      console.log("payload", payload);
-
       const newImageUrls = payload.urls?.map((url: string) => {
         return import.meta.env.VITE_NASA_URL + url;
       });
-
-      console.log("newImageUrls", newImageUrls);
       const newImageUrlsWithoutPrefix = payload.urls?.map((url: string) => {
         return url;
       });

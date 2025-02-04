@@ -12,6 +12,8 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 import {
   createOperationalRequest,
   createOperationalRequestCons,
+  createOperationalRequestEmp,
+  getProjects,
   getProjectsForConsultant,
   getProjectsForEmp,
 } from "../../../services";
@@ -53,6 +55,8 @@ const AddRequest: React.FC = () => {
             pageNumber: 1,
             limit: 10,
           });
+        } else {
+          response = await getProjects({ pageNumber: 1, limit: 10 });
         }
 
         if (response) {
@@ -107,10 +111,11 @@ const AddRequest: React.FC = () => {
           type: values.type,
         };
         if (user.type === "Employee") {
-          await createOperationalRequest(payload);
-        }
-        if (user.type === "Consultant") {
+          await createOperationalRequestEmp(payload);
+        } else if (user.type === "Consultant") {
           await createOperationalRequestCons(payload);
+        } else {
+          await createOperationalRequest(payload);
         }
         showToast(t("requests.requestCreated"), "success");
         navigate(routes.OPERATIONALREQUESTS);

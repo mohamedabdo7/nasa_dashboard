@@ -510,6 +510,20 @@ export const createOperationalRequest = async (
     throw error;
   }
 };
+export const createOperationalRequestEmp = async (
+  payload: CreateRequestPayload
+): Promise<any> => {
+  try {
+    const response = await api.send<any>(
+      "createOperationalRequestEmp",
+      payload
+    );
+    return response;
+  } catch (error) {
+    console.error("Error creating project:", error);
+    throw error;
+  }
+};
 export const createOperationalRequestCons = async (
   payload: CreateRequestPayload
 ): Promise<any> => {
@@ -528,6 +542,28 @@ export const createOperationalRequestCons = async (
 export const getOneOperationalRequest = async (id: string): Promise<any> => {
   try {
     const response = await api.send<any>("getOneOperationalRequest", { id });
+    return response;
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    throw error;
+  }
+};
+export const getOneOperationalRequestEmp = async (id: string): Promise<any> => {
+  try {
+    const response = await api.send<any>("getOneOperationalRequestEmp", { id });
+    return response;
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    throw error;
+  }
+};
+export const getOneOperationalRequestCons = async (
+  id: string
+): Promise<any> => {
+  try {
+    const response = await api.send<any>("getOneOperationalRequestCons", {
+      id,
+    });
     return response;
   } catch (error) {
     console.error("Error fetching project:", error);
