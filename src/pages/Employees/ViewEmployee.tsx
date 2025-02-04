@@ -13,6 +13,7 @@ import SectionContainer from "../../components/SectionContainer/SectionContainer
 import InfoCard from "../../components/UI/InfoCard/InfoCard";
 import ActionsMenu from "../../components/UI/ActionsMenu/ActionsMenu";
 import { FaExclamationCircle } from "react-icons/fa";
+import ImageWithModal from "../../components/ImageWithModal/ImageWithModal";
 
 const ViewEmployee: React.FC = () => {
   const { t } = useTranslation();
@@ -90,13 +91,13 @@ const ViewEmployee: React.FC = () => {
             >
               <Row>
                 <Col md={12} lg={12} className="mb-3">
-                  {employeeData.image && (
-                    <img
-                      src={employeeData.image}
-                      alt={employeeData.name}
-                      className="employee-image"
+                  <Col md={12} lg={12} className="mb-3">
+                    <ImageWithModal
+                      imageUrl={employeeData.image}
+                      name={employeeData.name}
+                      alt="Project Image"
                     />
-                  )}
+                  </Col>
                 </Col>
 
                 <Col xs={12} md={6} lg={6}>
