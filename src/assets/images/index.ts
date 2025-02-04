@@ -1,13 +1,8 @@
-export { default as globe } from "./globe.svg";
-export { default as global } from "./global.png";
-export { default as Subtract } from "./Subtract.png";
 export { default as contactus } from "./contactus.svg";
 export { default as contactus1 } from "./contactus1.svg";
 export { default as contactus2 } from "./contactus2.svg";
 export { default as contactus3 } from "./contactus3.svg";
-export { default as hero } from "./hero.png";
 
-export { default as whowe } from "./whoweBg.png";
 export { default as whoweIcon } from "./who-we-icon.svg";
 export { default as ourVisionIcon } from "./our-vision-icon.svg";
 export { default as ourMissionIcon } from "./our-mission-icon.svg";
