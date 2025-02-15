@@ -1,3 +1,7 @@
 @use "styles/main";
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/react-toastify/dist/ReactToastify.min.css";
+
+.request-template-container {
+  display: none;
+}

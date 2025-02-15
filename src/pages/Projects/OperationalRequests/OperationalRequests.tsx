@@ -45,7 +45,6 @@ const OperationalRequests: FC = () => {
       : user.type === "Consultant"
       ? "getGlobalOperationalRequestsForCons"
       : "getGlobalOperationalRequests"; // API endpoint for projects
-  // const url = "getGlobalOperationalRequests"; // API endpoint for requests
   const { data, loading, count, setPageNumber, pageNumber } = useFetchTableData(
     searchValue,
     url,
@@ -86,39 +85,6 @@ const OperationalRequests: FC = () => {
     }
   };
 
-  // Fetch projects with pagination
-  // const fetchProjects = async (page: number, search = "") => {
-  //   console.log("page", search);
-
-  //   try {
-  //     const response = await getProjectsForEmp({
-  //       pageNumber: page,
-  //       limit: 10,
-  //       // search,
-  //     });
-  //     console.log("response", response);
-
-  //     const newOptions = response.data.rows.map((project: any) => ({
-  //       value: project.id,
-  //       label: project.nameEn || project.nameAr,
-  //     }));
-
-  //     setProjectOptions((prevOptions) => {
-  //       const existingIds = new Set(prevOptions.map((opt) => opt.value));
-  //       return [
-  //         ...prevOptions,
-  //         ...newOptions.filter((opt) => !existingIds.has(opt.value)), // Avoid duplicates
-  //       ];
-  //     });
-
-  //     console.log("newOptions", newOptions);
-
-  //     return newOptions;
-  //   } catch (error) {
-  //     console.error("Error fetching projects:", error);
-  //     return [];
-  //   }
-  // };
   const fetchProjects = async (page: number, search = "") => {
     console.log("page", search);
 
@@ -243,7 +209,7 @@ const OperationalRequests: FC = () => {
                 setProjectId(value?.value || null);
                 setListener(!listener);
               }} // Update projectId
-              // isClearable
+              labelBackgroundColor="#ebf0ff"
             />
           </Col>
           {/* {user.type === "Admin" && ( */}
