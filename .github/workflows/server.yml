@@ -1,0 +1,25 @@
+name: Push to  server 
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+     -  name: Checkout repository
+        uses: actions/checkout@v2
+
+     - name: Deploy to server
+       env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST:  147.93.94.206
+          REMOTE_USER: root
+       run: |
+         echo "$SSH_PRIVATE_KEY"  > privte.pem
+         chmod  400 privte.pem
+         ssh -i privte.pem -o "StrictHostKeyChecking no" $REMOTE_USER@$REMOTE_HOST " \
+           cd nasa_dashboard  && git add .  && git stash  &&  git pull  &&  npm install  &&
+           npm run build && sudo cp -r  /root/nasa_dashboard/dist/*  /var/www/html/ && sudo systemctl  restart nginx.service"
