@@ -62,7 +62,7 @@ const ConsultantsList: FC = () => {
       console.error("Failed to delete consultant:", error);
 
       // Show error message if the deletion fails
-      showToast(t("consultants.deleteFailed"), "error");
+      // showToast(t("consultants.deleteFailed"), "error");
     } finally {
       setDeleteLoading(false);
     }

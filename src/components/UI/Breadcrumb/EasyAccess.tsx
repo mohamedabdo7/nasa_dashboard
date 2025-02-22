@@ -65,7 +65,8 @@ const EasyAccess: React.FC<CustomBreadcrumbProps> = ({
               onClick={() => handleBreadcrumbClick(item)}
               style={{
                 cursor: hasLink ? "pointer" : "default",
-                color: "",
+                color: "var(--primary) !Important",
+                textDecoration: "none !Important",
               }}
             >
               {item.text}

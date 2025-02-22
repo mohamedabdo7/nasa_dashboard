@@ -62,7 +62,7 @@ const ContractorsList: FC = () => {
       console.error("Failed to delete contractor:", error);
 
       // Show error message if the deletion fails
-      showToast(t("contractors.deleteFailed"), "error");
+      // showToast(t("contractors.deleteFailed"), "error");
     } finally {
       setDeleteLoading(false);
     }

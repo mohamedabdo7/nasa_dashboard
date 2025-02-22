@@ -8,7 +8,7 @@
     padding: 0.8em;
     min-height: 50px;
     outline: none;
-    border: 1px solid var(--dark-chocolate);
+    border: 1px solid var(--primary);
     background-color: transparent;
     border-radius: 8px;
     width: 100%;
@@ -16,7 +16,7 @@
     padding-right: 22px;
     color: var(--primary) !important;
     &::placeholder {
-      color: var(--dark-chocolate);
+      color: var(--primary);
       opacity: 1;
       margin: 0 1rem;
       // font-size: 14px;
@@ -58,7 +58,7 @@
     margin-right: 0.5em;
     pointer-events: none;
     transition: all 0.3s ease;
-    color: var(--gray);
+    color: var(--primary);
     transform: translateY(-50%) scale(0.9);
     background-color: var(--white);
   }
