@@ -70,7 +70,7 @@ const ProjectsList: FC = () => {
       console.error("Failed to delete project:", error);
 
       // Show error message if the deletion fails
-      showToast(t("projects.deleteFailed"), "error");
+      // showToast(t("projects.deleteFailed"), "error");
     } finally {
       setDeleteLoading(false);
     }
@@ -78,18 +78,18 @@ const ProjectsList: FC = () => {
 
   // Table columns definition
   const columns = [
-    {
-      Header: t("projects.projectId"),
-      accessor: "id",
-      disableSortBy: true,
-      Cell: ({ row }: any) => (
-        <div className="d-flex">
-          <span className="ms-2">
-            {truncateString(row.original.id, i18n.language !== "en", 10)}
-          </span>
-        </div>
-      ),
-    },
+    // {
+    //   Header: t("projects.projectId"),
+    //   accessor: "id",
+    //   disableSortBy: true,
+    //   Cell: ({ row }: any) => (
+    //     <div className="d-flex">
+    //       <span className="ms-2">
+    //         {truncateString(row.original.id, i18n.language !== "en", 10)}
+    //       </span>
+    //     </div>
+    //   ),
+    // },
     {
       Header: t("projects.projectName"),
       accessor: i18n.language === "en" ? "nameEn" : "nameAr",

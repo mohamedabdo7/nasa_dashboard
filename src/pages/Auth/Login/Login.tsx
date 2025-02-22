@@ -111,6 +111,7 @@ const Login: React.FC = () => {
                 setSelectedType(option);
               }}
               name="userType"
+              isSearchable={false}
             />
           </div>
 

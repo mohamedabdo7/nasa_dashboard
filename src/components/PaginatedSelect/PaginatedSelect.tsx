@@ -47,7 +47,7 @@ const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
       height: "auto",
       minHeight: "50px",
       borderRadius: "8px",
-      borderColor: state.isFocused ? "var(--primary)" : null,
+      borderColor: state.isFocused ? "var(--primary)" : "var(--primary)",
       boxShadow: "unset",
       "&:hover": {
         borderColor: "unset",
@@ -79,6 +79,12 @@ const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
         backgroundColor: "var(--primary)",
         color: "#fff",
       },
+    }),
+    placeholder: (base: any) => ({
+      ...base,
+      textAlign: "left", // Align placeholder text to the start
+      color: "var(--primary)", // Optional: Placeholder color
+      margin: "0", // Remove any default margin
     }),
     indicatorSeparator: () => ({
       display: "none",
@@ -162,7 +168,7 @@ const PaginatedSelect: React.FC<PaginatedSelectProps> = ({
             // backgroundColor: "var(--white)",
             backgroundColor: labelBackgroundColor,
             zIndex: "1",
-            color: "var(--gray)",
+            color: "var(--primary)",
           }}
         >
           <span className="mx-2">{labelName}</span>

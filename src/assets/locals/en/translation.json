@@ -102,7 +102,12 @@
     "confirmPasswordRequired": "Confirm password is required",
     "passwordMismatch": "Passwords do not match",
     "roleRequired": "Please select a role",
-    "imageRequired": "Please upload an image"
+    "imageRequired": "Please upload an image",
+    "passwordMinLength": "min Length must be 8 ",
+    "lowercaseRequired": "password must contain lower case",
+    "uppercaseRequired": "password must contain upper case",
+    "specialCharRequired": "password must contain special character",
+    "passwordsMatch": "password not matches"
   },
 
   "actions": {
