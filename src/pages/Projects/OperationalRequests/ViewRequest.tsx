@@ -51,6 +51,8 @@ const ViewRequest: React.FC = () => {
     { text: t("requests.viewRequest") },
   ];
 
+  console.log(requestData?.project);
+
   const getRequestHandler = async () => {
     setLoading(true);
     try {
@@ -282,6 +284,7 @@ const ViewRequest: React.FC = () => {
                   crossOrigin="anonymous"
                   alt="Client Logo"
                   className="logo"
+                  style={{ width: "100%", height: "180px" }}
                 />
               </th>
               <th>
@@ -292,6 +295,7 @@ const ViewRequest: React.FC = () => {
                   crossOrigin="anonymous"
                   alt="Project Logo"
                   className="logo"
+                  style={{ width: "100%", height: "180px" }}
                 />
               </th>
               <th>
@@ -303,6 +307,7 @@ const ViewRequest: React.FC = () => {
                   crossOrigin="anonymous"
                   alt="Consultant Logo"
                   className="logo"
+                  style={{ width: "100%", height: "180px" }}
                 />
               </th>
               <th>
@@ -314,6 +319,7 @@ const ViewRequest: React.FC = () => {
                   crossOrigin="anonymous"
                   alt="Contractor Logo"
                   className="logo"
+                  style={{ width: "100%", height: "180px" }}
                 />
               </th>
             </tr>
